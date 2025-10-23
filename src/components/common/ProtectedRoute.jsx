@@ -20,7 +20,9 @@ const ProtectedRoute = ({ children }) => {
         };
         sessionStorage.setItem('buyNowData', JSON.stringify(dataToStore));
       } catch (error) {
-        console.warn('Failed to store buyNowData in sessionStorage:', error);
+        if (import.meta.env.MODE === 'development') {
+          console.warn('Failed to store buyNowData in sessionStorage:', error);
+        }
       }
     }
     

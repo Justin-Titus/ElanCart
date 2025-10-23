@@ -72,6 +72,7 @@ const ProductDetailPage = () => {
   }, [id, products]);
   const [buyNowDialogOpen, setBuyNowDialogOpen] = useState(false);
   const [buyNowQty, setBuyNowQty] = useState(1);
+  const [copySnackOpen, setCopySnackOpen] = useState(false);
 
   // Handle Buy Now button click - open dialog
   const handleBuyNowClick = () => {
@@ -147,7 +148,13 @@ const ProductDetailPage = () => {
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert("Product link copied to clipboard!");
+      // Use a non-blocking UI message instead of alert for production
+      try {
+        setCopySnackOpen(true);
+      } catch {
+        // fallback for environments without React UI (rare)
+        // no-op
+      }
     }
   };
 
@@ -195,7 +202,7 @@ const ProductDetailPage = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Box>
+  <Box>
         {/* Breadcrumbs */}
         {/* <Breadcrumbs sx={{ mb: 3 }}>
         <Link
@@ -654,6 +661,9 @@ const ProductDetailPage = () => {
             </Button>
           </DialogActions>
         </Dialog>
+        <Snackbar open={copySnackOpen} autoHideDuration={3000} onClose={() => setCopySnackOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert onClose={() => setCopySnackOpen(false)} severity="success" sx={{ width: '100%' }}>Product link copied to clipboard!</Alert>
+        </Snackbar>
       </Box>
     </motion.div>
   );

@@ -10,7 +10,6 @@ import Layout from './components/layout/Layout';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import ScrollToTop from './components/common/ScrollToTop';
 import OptimizedRouter from './components/common/OptimizedRouter';
-import PerformanceMonitor from './components/common/PerformanceMonitor';
 import theme from './theme';
 
 
@@ -29,7 +28,9 @@ const App = memo(() => {
         try {
           loader();
         } catch (error) {
-          console.warn('Route prefetch failed:', error);
+          if (import.meta.env.MODE === 'development') {
+            console.warn('Route prefetch failed:', error);
+          }
         }
       });
     };
@@ -42,7 +43,7 @@ const App = memo(() => {
   }, []);
   return (
     <ErrorBoundary>
-      {import.meta.env.DEV && <PerformanceMonitor />}
+  {/* PerformanceMonitor removed from production build - keep monitoring out of the bundle */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <UserProvider>

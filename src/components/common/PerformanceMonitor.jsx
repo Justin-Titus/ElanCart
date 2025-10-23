@@ -6,16 +6,18 @@ const PerformanceMonitor = () => {
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       entries.forEach((entry) => {
-        if (entry.entryType === 'navigation') {
-          console.log('Navigation Performance:', {
-            domContentLoaded: entry.domContentLoadedEventEnd - entry.domContentLoadedEventStart,
-            loadComplete: entry.loadEventEnd - entry.loadEventStart,
-            totalTime: entry.loadEventEnd - entry.fetchStart
-          });
-        }
-        
-        if (entry.entryType === 'measure' && entry.name.includes('React')) {
-          console.log('React Performance:', entry.name, entry.duration);
+  if (import.meta.env.MODE === 'development') {
+          if (entry.entryType === 'navigation') {
+            console.log('Navigation Performance:', {
+              domContentLoaded: entry.domContentLoadedEventEnd - entry.domContentLoadedEventStart,
+              loadComplete: entry.loadEventEnd - entry.loadEventStart,
+              totalTime: entry.loadEventEnd - entry.fetchStart
+            });
+          }
+
+          if (entry.entryType === 'measure' && entry.name.includes('React')) {
+            console.log('React Performance:', entry.name, entry.duration);
+          }
         }
       });
     });
@@ -29,7 +31,7 @@ const PerformanceMonitor = () => {
       const routeChangeEnd = performance.now();
       const duration = routeChangeEnd - routeChangeStart;
       
-      if (duration > 100) {
+  if (duration > 100 && import.meta.env.MODE === 'development') {
         console.warn(`Slow route change detected: ${duration.toFixed(2)}ms`);
       }
       
