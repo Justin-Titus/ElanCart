@@ -1,0 +1,337 @@
+/* About Page formal and clean styling */
+.about-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px 16px;
+}
+.about-page-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5em;
+  color: #1e293b;
+  letter-spacing: 0.01em;
+}
+.about-page-pillar-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(60,60,120,0.04);
+  padding: 28px 24px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+.about-page-pillar-card:hover {
+  box-shadow: 0 4px 24px 0 rgba(60,60,120,0.10);
+  border-color: #a3bffa;
+}
+.about-page-pillar-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #334155;
+}
+.about-page-pillar-desc {
+  color: #64748b;
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+.about-page-promise {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 1px 8px 0 rgba(60,60,120,0.03);
+  padding: 28px 22px;
+  margin-top: 32px;
+}
+.about-page-promise-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5em;
+}
+.about-page-promise-desc {
+  color: #475569;
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .about-page-container {
+    padding: 18px 12px 24px 12px;
+  }
+  .about-page-heading {
+    font-size: 1.5rem;
+  }
+  .about-page-pillar-card {
+    padding: 18px 10px;
+  }
+  .about-page-promise {
+    padding: 16px 8px;
+  }
+}
+.MuiToolbar-root .MuiIconButton-root:hover svg {
+  transform: scale(1.13);
+  transition: color 0.18s, transform 0.18s;
+}
+.MuiToolbar-root .MuiIconButton-root:hover .MuiSvgIcon-root[data-testid="FavoriteBorderIcon"] {
+  color: #ec4899;
+}
+.MuiToolbar-root .MuiIconButton-root:hover .MuiSvgIcon-root[data-testid="ShoppingCartIcon"] {
+  color: #2563eb;
+}
+.MuiToolbar-root .MuiIconButton-root:hover .MuiSvgIcon-root[data-testid="AccountCircleIcon"] {
+  color: #14b8a6;
+}
+/* Header search bar styling */
+.MuiToolbar-root .MuiInputBase-root {
+  background: rgba(245, 247, 255, 0.85);
+  border-radius: 8px;
+  border: 1px solid #e3e8f0;
+  box-shadow: 0 1px 6px 0 rgba(60,60,120,0.04);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.MuiToolbar-root .MuiInputBase-root:focus-within {
+  box-shadow: 0 2px 12px 0 rgba(60,60,120,0.10);
+  border-color: #a3bffa;
+}
+
+/* Header icon buttons (cart, favourites, profile) */
+.MuiToolbar-root .MuiIconButton-root {
+  background: transparent;
+  border-radius: 50%;
+  transition: background 0.18s, box-shadow 0.18s;
+  box-shadow: none;
+}
+.MuiToolbar-root .MuiIconButton-root:hover {
+  background: rgba(90, 132, 255, 0.10);
+  box-shadow: 0 2px 8px 0 rgba(60,60,120,0.08);
+}
+.MuiToolbar-root .MuiBadge-root {
+  transition: transform 0.18s;
+}
+.MuiToolbar-root .MuiIconButton-root:active .MuiBadge-root {
+  transform: scale(0.92);
+}
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  display: block;
+  scroll-behavior: smooth;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+} */
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* In-view animations */
+.in-view-hidden {
+  opacity: 0;
+  transform: translateY(18px) scale(0.99);
+  transition: opacity 520ms cubic-bezier(.2,.9,.2,1), transform 520ms cubic-bezier(.2,.9,.2,1);
+}
+
+.in-view-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scale-up-on-enter {
+  transform-origin: center center;
+  transition: transform 380ms cubic-bezier(.2,.9,.2,1), opacity 380ms ease;
+}
+
+.fade-in { opacity: 0; transition: opacity 420ms ease; }
+.fade-in.in-view-visible { opacity: 1; }
+
+/* SplitText styling */
+.home-title, .spotlight-title, .product-title, .cart-title {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.home-title, .spotlight-title, .cart-title {
+  font-size: 2.125rem;
+}
+
+.product-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.split-char, .split-word {
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .home-title, .spotlight-title, .cart-title {
+    font-size: 1.75rem;
+  }
+  
+  .product-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Normalize browser autofill appearance so color/background do not change unexpectedly */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: unset !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+/* For non-webkit browsers fallback */
+input:-internal-autofill-selected,
+textarea:-internal-autofill-selected,
+select:-internal-autofill-selected {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
+/* Additional selectors for MUI inputs and Firefox to ensure consistent appearance */
+input.MuiInputBase-input:-webkit-autofill,
+input.MuiOutlinedInput-input:-webkit-autofill,
+.MuiInputBase-root input:-webkit-autofill,
+.MuiOutlinedInput-root input:-webkit-autofill,
+.MuiFilledInput-root input:-webkit-autofill,
+textarea.MuiInputBase-input:-webkit-autofill,
+select.MuiInputBase-input:-webkit-autofill {
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  background-clip: padding-box !important;
+}
+
+/* Firefox autofill handling */
+:-moz-autofill,
+input:-moz-autofill,
+textarea:-moz-autofill,
+select:-moz-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -moz-text-fill-color: inherit !important;
+}
+
+/* Performance optimized animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Performance optimizations */
+* {
+  will-change: auto;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .in-view-hidden,
+  .in-view-visible,
+  .scale-up-on-enter,
+  .fade-in {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Optimize rendering performance */
+.MuiContainer-root,
+.MuiBox-root,
+.MuiPaper-root {
+  contain: layout style;
+}
+
+/* Optimize scroll performance */
+.MuiContainer-root {
+  transform: translateZ(0);
+}

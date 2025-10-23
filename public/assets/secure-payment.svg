@@ -1,0 +1,8 @@
+<!-- Secure payment icon SVG from uxwing adapted for local use -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="none">
+  <rect x="1" y="5" width="22" height="14" rx="2" fill="#1976D2"/>
+  <rect x="2" y="7" width="8" height="2" rx="0.5" fill="#fff"/>
+  <rect x="2" y="11" width="12" height="2" rx="0.5" fill="#fff"/>
+  <circle cx="18" cy="12" r="4" fill="#fff"/>
+  <path d="M16 12.5l1 1 2-2" stroke="#1976D2" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+</svg>

@@ -1,0 +1,35 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  overflow: visible;
+  outline: none;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(15, 23, 42, 0.85);
+  color: #f8fafc;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.35);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .container {
+    transform: scale(0.85) translate(8%, 12%);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    transform: scale(0.7) translate(14%, 18%);
+  }
+}

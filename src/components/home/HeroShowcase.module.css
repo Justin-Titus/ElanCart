@@ -1,0 +1,220 @@
+.heroContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  width: 100%;
+  padding: clamp(1.2rem, 4vw, 2.4rem);
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(44, 107, 255, 0.12), rgba(123, 31, 162, 0.1));
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 30px 60px rgba(15, 40, 100, 0.12);
+  align-items: stretch;
+  /* clip any parts of the stacked cards that extend outside the hero area */
+  overflow: hidden;
+  position: relative;
+  max-height: 470px;
+}
+
+.textSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.heading {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.subheading {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(15, 23, 42, 0.8);
+  max-width: 32rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primaryButton:hover,
+.primaryButton:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 30px rgba(37, 99, 235, 0.25);
+}
+
+.secondaryButton {
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: transparent;
+  color: #1f2937;
+  border: 1px solid rgba(15, 23, 42, 0.24);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus-visible {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.cardSection {
+  flex: 0 0 360px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* overflow: hidden; */
+  position: relative;
+  z-index: 1;
+}
+
+.cardSwapWrapper {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* nudge the card stack slightly left so it sits more centered visually */
+  transform: translateX(-24px);
+}
+
+.showcaseCard {
+  background: rgba(248, 250, 252, 0.92);
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cardFigure {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.05);
+  /* ensure image container has a predictable height so images don't get clipped */
+  height: 180px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cardPrice {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 0;
+}
+
+.cardCta {
+  align-self: flex-start;
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardCta:hover,
+.cardCta:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .heroContainer {
+    flex-direction: column;
+    gap: 2.5rem;
+    min-height: unset;
+    max-height: unset;
+  }
+
+  .cardSection {
+    max-width: none;
+    width: 100%;
+  }
+
+  .cardSwapWrapper {
+    height: 360px;
+    min-height: 260px;
+    width: min(100%, 420px);
+    /* smaller nudge on tablet */
+    transform: translateX(-42px);
+  }
+}
+
+@media (max-width: 640px) {
+  .heroContainer {
+    /* reduce vertical padding to give more room for cards */
+    padding: 0.6rem 1rem;
+    /* slightly reduce overall hero height on mobile */
+    min-height:540px;
+    max-height:680px;
+  }
+
+  .cardSwapWrapper {
+    /* reduce card wrapper height for mobile */
+    height: calc(360px * 0.7);
+    /* remove horizontal nudge on mobile to avoid overlap */
+    transform: translateX(120px);
+    transform: translateY(-90px);
+  }
+
+  .showcaseCard {
+    padding: 1rem;
+  }
+
+  /* Make primary CTA smaller on mobile so it doesn't push the carousel down */
+  .primaryButton {
+    padding: 0.45rem 0.9rem;
+    font-size: 1rem;
+  }
+}
