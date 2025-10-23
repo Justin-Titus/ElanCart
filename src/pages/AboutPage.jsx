@@ -42,10 +42,10 @@ const AboutPage = () => {
     <PageTransition>
     <div className="about-page-container">
       <div className="about-page-heading">
-        We are ShopEasy — your modern retail companion.
+        We are ElanCart — your modern retail companion.
       </div>
       <p style={{ color: '#64748b', fontSize: '1.08rem', lineHeight: 1.8, marginBottom: 36 }}>
-        ShopEasy started as a small collective of designers, product enthusiasts, and engineers determined to build an online store that values depth over endless scrolling. Today we curate collections from trusted partners around the world, pairing them with inspiration, editorial storytelling, and services that help every shopper feel confident.
+        ElanCart started as a small collective of designers, product enthusiasts, and engineers determined to build an online store that values depth over endless scrolling. Today we curate collections from trusted partners around the world, pairing them with inspiration, editorial storytelling, and services that help every shopper feel confident.
       </p>
 
       <Grid container spacing={3}>

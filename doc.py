@@ -3,18 +3,18 @@ from docx.shared import Pt
 
 # Create document
 doc = Document()
-doc.add_heading("ShopEasy Website Documentation", 0)
+doc.add_heading("ElanCart Website Documentation", 0)
 
 # 1. Description
 doc.add_heading("1. Project Overview", level=1)
 doc.add_paragraph("""
-ShopEasy is a responsive e-commerce front-end built with React that showcases a small-to-medium online store experience. It provides product browsing, filtering, product detail pages, a shopping cart, favourites, and checkout flows (UI only). The project demonstrates component-driven UI, context-based state management, modular CSS, and integration points for REST APIs and payment gateways.
+ElanCart is a responsive e-commerce front-end built with React that showcases a small-to-medium online store experience. It provides product browsing, filtering, product detail pages, a shopping cart, favourites, and checkout flows (UI only). The project demonstrates component-driven UI, context-based state management, modular CSS, and integration points for REST APIs and payment gateways.
 """)
 
 # 2. Objective / Problem Statement
 doc.add_heading("2. Objective / Problem Statement", level=1)
 doc.add_paragraph("""
-ShopEasy aims to provide a clean, mobile-friendly storefront experience for browsing and selecting products. The app focuses on delivering:
+ElanCart aims to provide a clean, mobile-friendly storefront experience for browsing and selecting products. The app focuses on delivering:
 
 - A clear product discovery experience with filters, quick categories, and banners.
 - Detailed product pages with images, attributes, and add-to-cart functionality.
@@ -72,7 +72,7 @@ Files to check for environment or API configuration:
 # 6. Live Website Link
 doc.add_heading("6. Live Website", level=1)
 doc.add_paragraph("""
-The production demo of ShopEasy is hosted at:
+The production demo of ElanCart is hosted at:
 https://shopeasy.netlify.app/
 
 This link points to the built static site (Netlify). Use the build / deploy pipeline to update this site when you publish new changes.
@@ -81,7 +81,7 @@ This link points to the built static site (Netlify). Use the build / deploy pipe
 # 7. Output / Result
 doc.add_heading("7. Features & User Flows", level=1)
 doc.add_paragraph("""
-Core features included in ShopEasy:
+Core features included in ElanCart:
 
 - Product discovery: product grid, quick filters, category banners, and search-friendly components.
 - Product detail page: image gallery, description, attributes, price, and add-to-cart.
@@ -98,7 +98,7 @@ Accessibility and responsiveness:
 # 8. Conclusion
 doc.add_heading("8. Extending & Next Steps", level=1)
 doc.add_paragraph("""
-Suggested improvements and realistic next steps to productionalise ShopEasy:
+Suggested improvements and realistic next steps to productionalise ElanCart:
 
 1. Backend & API: implement a REST or GraphQL API for products, carts, orders, and users. Secure endpoints and add server-side validation.
 2. Persistence: save cart and favourites server-side and add user accounts so state follows users across devices.
@@ -115,6 +115,6 @@ Low-risk developer tasks you can do next:
 """)
 
 # Save the docx file
-output_path = "ShopEasy_Documentation.docx"
+output_path = "ElanCart_Documentation.docx"
 doc.save(output_path)
 print(f"Documentation saved to {output_path}")

@@ -249,7 +249,7 @@ const Header = memo(() => {
             component="div"
             sx={{ fontWeight: 800, letterSpacing: '0.02em', color: 'text.primary', fontSize: { xs: '1.3rem', md: '2rem' } }}
           >
-            ShopEasy
+            ElanCart
           </Typography>
         </Box>
 

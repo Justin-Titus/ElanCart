@@ -106,7 +106,7 @@ const HeroShowcase = () => {
     <section className={styles.heroContainer} aria-label="Featured products highlight">
       <div className={styles.textSection}>
         <SplitText
-          text="ShopEasy makes everyday shopping effortless."
+          text="ElanCart makes everyday shopping effortless."
           className={styles.heading}
           delay={50}
           duration={0.8}

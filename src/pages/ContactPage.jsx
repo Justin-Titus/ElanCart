@@ -166,7 +166,7 @@ const ContactPage = () => {
                     Email
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    support@shopeasy.com
+                    support@elancart.com
                   </Typography>
                 </Box>
               </Stack>

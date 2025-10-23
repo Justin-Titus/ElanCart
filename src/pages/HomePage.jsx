@@ -194,7 +194,7 @@ const HomePage = memo(() => {
         <Box>
           <Box sx={{ textAlign: 'center' }}>
             <SplitText
-              text="Why shoppers love ShopEasy"
+              text="Why shoppers love ElanCart"
               tag="h4"
               className="home-title"
               delay={60}

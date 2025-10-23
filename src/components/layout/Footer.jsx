@@ -17,6 +17,7 @@ import {
   Snackbar,
   Alert
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, YouTube, ArrowUpward } from '@mui/icons-material';
 import { useLocale } from '../../contexts/useLocale';
 import { PartnerLogoPlaceholder } from './FooterAssets';
@@ -45,25 +46,25 @@ const Footer = () => {
       <Container maxWidth="xl">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>ShopEasy</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>ElanCart</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>Handpicked products, delivered with care.</Typography>
             <Stack spacing={0.5}>
-              <Link href="/about" underline="hover">About Us</Link>
-              <Link href="/contact" underline="hover">Contact Us</Link>
-              <Link href="/careers" underline="hover">Careers</Link>
-              <Link href="/blog" underline="hover">Blog</Link>
+              <Link component={RouterLink} to="/about" underline="hover">About Us</Link>
+              <Link component={RouterLink} to="/contact" underline="hover">Contact Us</Link>
+              <Link component={RouterLink} to="/careers" underline="hover">Careers</Link>
+              <Link component={RouterLink} to="/blog" underline="hover">Blog</Link>
             </Stack>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Customer Support</Typography>
             <Stack spacing={0.5}>
-              <Link href="/help" underline="hover">Help Center / FAQs</Link>
-              <Link href="/shipping" underline="hover">Shipping & Delivery</Link>
-              <Link href="/returns" underline="hover">Returns & Refunds</Link>
-              <Link href="/payment" underline="hover">Payment Methods</Link>
-              <Link href="/privacy" underline="hover">Privacy Policy</Link>
-              <Link href="/terms" underline="hover">Terms & Conditions</Link>
+              <Link component={RouterLink} to="/help" underline="hover">Help Center / FAQs</Link>
+              <Link component={RouterLink} to="/shipping" underline="hover">Shipping & Delivery</Link>
+              <Link component={RouterLink} to="/returns" underline="hover">Returns & Refunds</Link>
+              <Link component={RouterLink} to="/payment" underline="hover">Payment Methods</Link>
+              <Link component={RouterLink} to="/privacy" underline="hover">Privacy Policy</Link>
+              <Link component={RouterLink} to="/terms" underline="hover">Terms & Conditions</Link>
             </Stack>
           </Grid>
 
@@ -71,19 +72,19 @@ const Footer = () => {
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Shop</Typography>
             <Grid container>
               <Grid item xs={6}>
-                <Stack spacing={0.5}>
-                  <Link href="/products" underline="hover">All Products</Link>
-                  <Link href="/products/men" underline="hover">Men</Link>
-                  <Link href="/products/women" underline="hover">Women</Link>
-                  <Link href="/products/kids" underline="hover">Kids</Link>
+                  <Stack spacing={0.5}>
+                  <Link component={RouterLink} to="/products" underline="hover">All Products</Link>
+                  <Link component={RouterLink} to="/products/men" underline="hover">Men</Link>
+                  <Link component={RouterLink} to="/products/women" underline="hover">Women</Link>
+                  <Link component={RouterLink} to="/products/kids" underline="hover">Kids</Link>
                 </Stack>
               </Grid>
               <Grid item xs={6}>
                 <Stack spacing={0.5}>
-                  <Link href="/new" underline="hover">New Arrivals</Link>
-                  <Link href="/sale" underline="hover">Offers / Sale</Link>
-                  <Link href="/best-sellers" underline="hover">Best Sellers</Link>
-                  <Link href="/gift-cards" underline="hover">Gift Cards</Link>
+                  <Link component={RouterLink} to="/new" underline="hover">New Arrivals</Link>
+                  <Link component={RouterLink} to="/sale" underline="hover">Offers / Sale</Link>
+                  <Link component={RouterLink} to="/best-sellers" underline="hover">Best Sellers</Link>
+                  <Link component={RouterLink} to="/gift-cards" underline="hover">Gift Cards</Link>
                 </Stack>
               </Grid>
             </Grid>
@@ -208,11 +209,11 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
-            <Typography variant="caption" color="text.secondary">© {new Date().getFullYear()} ShopEasy — All rights reserved.</Typography>
+            <Typography variant="caption" color="text.secondary">© {new Date().getFullYear()} ElanCart — All rights reserved.</Typography>
             <Stack direction="row" spacing={1} alignItems="center">
-              <Link href="/privacy">Privacy</Link>
-              <Link href="/terms">Terms</Link>
-              <Link href="/cookies">Cookie Policy</Link>
+              <Link component={RouterLink} to="/privacy">Privacy</Link>
+              <Link component={RouterLink} to="/terms">Terms</Link>
+              <Link component={RouterLink} to="/cookies">Cookie Policy</Link>
             </Stack>
           </Grid>
 
