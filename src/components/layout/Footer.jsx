@@ -48,44 +48,57 @@ const Footer = () => {
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>ElanCart</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>Handpicked products, delivered with care.</Typography>
-            <Stack spacing={0.5}>
-              <Link component={RouterLink} to="/about" underline="hover">About Us</Link>
-              <Link component={RouterLink} to="/contact" underline="hover">Contact Us</Link>
-              <Link component={RouterLink} to="/careers" underline="hover">Careers</Link>
-              <Link component={RouterLink} to="/blog" underline="hover">Blog</Link>
-            </Stack>
+            <Box component="nav" aria-label="about links">
+              <Stack spacing={0.5}>
+                <Link
+                  component={RouterLink}
+                  to="/about"
+                  underline="none"
+                  sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline', transform: 'translateX(3px)' } }}
+                >About Us</Link>
+                <Link component={RouterLink} to="/contact" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline', transform: 'translateX(3px)' } }}>Contact Us</Link>
+                <Link component={RouterLink} to="/careers" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline', transform: 'translateX(3px)' } }}>Careers</Link>
+                <Link component={RouterLink} to="/blog" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline', transform: 'translateX(3px)' } }}>Blog</Link>
+              </Stack>
+            </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Customer Support</Typography>
-            <Stack spacing={0.5}>
-              <Link component={RouterLink} to="/help" underline="hover">Help Center / FAQs</Link>
-              <Link component={RouterLink} to="/shipping" underline="hover">Shipping & Delivery</Link>
-              <Link component={RouterLink} to="/returns" underline="hover">Returns & Refunds</Link>
-              <Link component={RouterLink} to="/payment" underline="hover">Payment Methods</Link>
-              <Link component={RouterLink} to="/privacy" underline="hover">Privacy Policy</Link>
-              <Link component={RouterLink} to="/terms" underline="hover">Terms & Conditions</Link>
-            </Stack>
+            <Box component="nav" aria-label="customer support links">
+              <Stack spacing={0.5}>
+                <Link component={RouterLink} to="/help" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Help Center / FAQs</Link>
+                <Link component={RouterLink} to="/shipping" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Shipping & Delivery</Link>
+                <Link component={RouterLink} to="/returns" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Returns & Refunds</Link>
+                <Link component={RouterLink} to="/payment" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Payment Methods</Link>
+                <Link component={RouterLink} to="/privacy" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Privacy Policy</Link>
+                <Link component={RouterLink} to="/terms" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', transition: 'color .12s, transform .12s', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Terms & Conditions</Link>
+              </Stack>
+            </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Shop</Typography>
             <Grid container>
               <Grid item xs={6}>
-                  <Stack spacing={0.5}>
-                  <Link component={RouterLink} to="/products" underline="hover">All Products</Link>
-                  <Link component={RouterLink} to="/products/men" underline="hover">Men</Link>
-                  <Link component={RouterLink} to="/products/women" underline="hover">Women</Link>
-                  <Link component={RouterLink} to="/products/kids" underline="hover">Kids</Link>
-                </Stack>
+                  <Box component="nav" aria-label="shop links">
+                    <Stack spacing={0.5}>
+                      <Link component={RouterLink} to="/products" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>All Products</Link>
+                      <Link component={RouterLink} to="/products/men" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Men</Link>
+                      <Link component={RouterLink} to="/products/women" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Women</Link>
+                      <Link component={RouterLink} to="/products/kids" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Kids</Link>
+                    </Stack>
+                  </Box>
               </Grid>
               <Grid item xs={6}>
-                <Stack spacing={0.5}>
-                  <Link component={RouterLink} to="/new" underline="hover">New Arrivals</Link>
-                  <Link component={RouterLink} to="/sale" underline="hover">Offers / Sale</Link>
-                  <Link component={RouterLink} to="/best-sellers" underline="hover">Best Sellers</Link>
-                  <Link component={RouterLink} to="/gift-cards" underline="hover">Gift Cards</Link>
-                </Stack>
+                <Box component="nav" aria-label="shop links 2">
+                  <Stack spacing={0.5}>
+                    <Link component={RouterLink} to="/new" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>New Arrivals</Link>
+                    <Link component={RouterLink} to="/sale" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Offers / Sale</Link>
+                    <Link component={RouterLink} to="/best-sellers" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Best Sellers</Link>
+                    <Link component={RouterLink} to="/gift-cards" underline="none" sx={{ display: 'block', color: 'text.secondary', fontSize: '0.95rem', textDecoration: 'none', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Gift Cards</Link>
+                  </Stack>
+                </Box>
               </Grid>
             </Grid>
           </Grid>
@@ -93,10 +106,53 @@ const Footer = () => {
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Connect with us</Typography>
             <Box sx={{ mb: 1 }}>
-              <IconButton size="small" component="a" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook fontSize="small" /></IconButton>
-              <IconButton size="small" component="a" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter fontSize="small" /></IconButton>
-              <IconButton size="small" component="a" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram fontSize="small" /></IconButton>
-              <IconButton size="small" component="a" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><YouTube fontSize="small" /></IconButton>
+              <IconButton
+                size="small"
+                component="a"
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                sx={{ color: 'text.secondary', transition: 'color .12s, transform .12s', '&:hover': { color: '#1877F2', transform: 'translateY(-2px)' } }}
+              >
+                <Facebook fontSize="small" />
+              </IconButton>
+
+              <IconButton
+                size="small"
+                component="a"
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                sx={{ color: 'text.secondary', transition: 'color .12s, transform .12s', '&:hover': { color: '#1DA1F2', transform: 'translateY(-2px)' } }}
+              >
+                <Twitter fontSize="small" />
+              </IconButton>
+
+              <IconButton
+                size="small"
+                component="a"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                sx={{ color: 'text.secondary', transition: 'color .12s, transform .12s', '&:hover': { color: '#E1306C', transform: 'translateY(-2px)' } }}
+              >
+                <Instagram fontSize="small" />
+              </IconButton>
+
+              <IconButton
+                size="small"
+                component="a"
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                sx={{ color: 'text.secondary', transition: 'color .12s, transform .12s', '&:hover': { color: '#FF0000', transform: 'translateY(-2px)' } }}
+              >
+                <YouTube fontSize="small" />
+              </IconButton>
             </Box>
 
             <Typography variant="body2" sx={{ mb: 1 }}>Subscribe to our newsletter</Typography>
@@ -210,10 +266,10 @@ const Footer = () => {
 
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
             <Typography variant="caption" color="text.secondary">© {new Date().getFullYear()} ElanCart — All rights reserved.</Typography>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <Link component={RouterLink} to="/privacy">Privacy</Link>
-              <Link component={RouterLink} to="/terms">Terms</Link>
-              <Link component={RouterLink} to="/cookies">Cookie Policy</Link>
+            <Stack direction="row" spacing={1} alignItems="center" component="nav" aria-label="legal links">
+              <Link component={RouterLink} to="/privacy" underline="none" sx={{ color: 'text.secondary', fontSize: '0.95rem', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Privacy</Link>
+              <Link component={RouterLink} to="/terms" underline="none" sx={{ color: 'text.secondary', fontSize: '0.95rem', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Terms</Link>
+              <Link component={RouterLink} to="/cookies" underline="none" sx={{ color: 'text.secondary', fontSize: '0.95rem', '&:hover': { color: 'primary.main', textDecoration: 'underline' } }}>Cookie Policy</Link>
             </Stack>
           </Grid>
 

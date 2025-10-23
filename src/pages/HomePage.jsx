@@ -92,8 +92,8 @@ const HomePage = memo(() => {
     navigate("/products");
   };
 
-  const MotionBox = motion(Box);
-  const MotionPaper = motion(Paper);
+  const MotionBox = motion.create(Box);
+  const MotionPaper = motion.create(Paper);
 
   // Small component for category card so each card can use the in-view hook
   function CategoryCard({ cat, idx }) {
