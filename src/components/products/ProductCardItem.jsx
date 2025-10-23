@@ -22,7 +22,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useFavourites } from '../../contexts/FavouritesContext';
 import useInView from '../../hooks/useInView';
 
-const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false, eagerLoad = false }) => {
+const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false, eagerLoad = false, index = 0 }) => {
   const navigate = useNavigate();
   const { addToCart, isInCart, getCartItem } = useCart();
   const { toggleFavourite, isFavourite } = useFavourites();
@@ -229,14 +229,17 @@ const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false
     </Card>
   );
 
-  // Use the project's useInView hook to animate when card enters viewport
+  // Use the project's useInView hook to animate when card enters viewport (10% visibility)
   const [ref, inView] = useInView({ threshold: 0.1 });
+
+  // Stagger delay per-card to create a cascading entrance
+  const delayMs = Math.min(index * 40, 300); // cap at 300ms
 
   const wrapperStyle = {
     height: '100%',
     opacity: disableAnimation ? 1 : inView ? 1 : 0,
-    transform: disableAnimation ? 'none' : inView ? 'translateY(0px) scale(1)' : 'translateY(8px) scale(0.995)',
-    transition: disableAnimation ? 'none' : 'opacity 250ms cubic-bezier(0.2,0,0,1), transform 250ms cubic-bezier(0.2,0,0,1)',
+    transform: disableAnimation ? 'none' : inView ? 'translateY(0px) scale(1)' : 'translateY(10px) scale(0.995)',
+    transition: disableAnimation ? 'none' : `opacity 380ms cubic-bezier(0.2,0,0,1) ${delayMs}ms, transform 420ms cubic-bezier(0.2,0,0,1) ${delayMs}ms, box-shadow 200ms ${delayMs}ms`,
     willChange: 'opacity, transform'
   };
 

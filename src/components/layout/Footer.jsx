@@ -150,17 +150,17 @@ const Footer = () => {
                       display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: { xs: 56, sm: 64 },
-                      height: { xs: 30, sm: 36 },
+                      width: { xs: 44, sm: 52 },
+                      height: { xs: 24, sm: 28 },
                       bgcolor: 'background.default',
-                      borderRadius: 1.5,
-                      p: 0.5,
+                      borderRadius: 1.25,
+                      p: 0.4,
                       boxShadow: 0,
                       transition: 'transform .15s, box-shadow .15s',
-                      '&:hover': { transform: 'scale(1.06)', boxShadow: 3 }
+                      '&:hover': { transform: 'scale(1.04)', boxShadow: 2 }
                     }}
                   >
-                    <Box component="img" src={l.src} alt={l.name} sx={{ maxHeight: '70%', maxWidth: '90%' }} />
+                    <Box component="img" src={l.src} alt={l.name} sx={{ maxHeight: '65%', maxWidth: '88%' }} />
                   </Box>
                 ))}
                 <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, ml: 1 }}>
@@ -173,15 +173,15 @@ const Footer = () => {
               </Stack>
 
               {/** App badges on the same row (desktop) or below (mobile) */}
-              <Stack direction="row" spacing={1} sx={{ mt: { xs: 1, md: 0 }, ml: { md: 4 } }}>
+              <Stack direction="row" spacing={1} sx={{ mt: { xs: 1, md: 0 }, ml: { md: 3 } }}>
                 <Box
                   sx={{
-                    width: { xs: 120, sm: 140 },
-                    height: { xs: 34, sm: 40 },
-                    borderRadius: 1,
+                    width: { xs: 96, sm: 110 },
+                    height: { xs: 28, sm: 34 },
+                    borderRadius: 0.8,
                     overflow: 'hidden',
-                    transition: 'transform .15s, box-shadow .15s',
-                    '&:hover': { transform: 'scale(1.03)', boxShadow: 3 }
+                    transition: 'transform .12s, box-shadow .12s',
+                    '&:hover': { transform: 'scale(1.02)', boxShadow: 2 }
                   }}
                 >
                   <Box component="img" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -189,12 +189,12 @@ const Footer = () => {
 
                 <Box
                   sx={{
-                    width: { xs: 120, sm: 140 },
-                    height: { xs: 34, sm: 40 },
-                    borderRadius: 1,
+                    width: { xs: 96, sm: 110 },
+                    height: { xs: 28, sm: 34 },
+                    borderRadius: 0.8,
                     overflow: 'hidden',
-                    transition: 'transform .15s, box-shadow .15s',
-                    '&:hover': { transform: 'scale(1.03)', boxShadow: 3 }
+                    transition: 'transform .12s, box-shadow .12s',
+                    '&:hover': { transform: 'scale(1.02)', boxShadow: 2 }
                   }}
                 >
                   <Box component="img" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />

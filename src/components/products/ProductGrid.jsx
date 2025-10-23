@@ -164,9 +164,9 @@ const ProductGrid = memo((props) => {
             </Box>
           </Grid>
         ) : (
-          products.map((product) => (
+          products.map((product, index) => (
             <Grid item xs={12} sm={viewMode === 'grid' ? 6 : 12} md={viewMode === 'grid' ? 4 : 12} lg={viewMode === 'grid' ? 3 : 12} key={product.id}>
-              <ProductCard product={product} viewMode={viewMode} />
+              <ProductCard product={product} viewMode={viewMode} index={index} />
             </Grid>
           ))
         )}
