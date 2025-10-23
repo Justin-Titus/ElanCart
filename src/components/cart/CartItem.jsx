@@ -156,7 +156,7 @@ const CartItem = ({ item }) => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-    <Card sx={{ mb: 2 }}>
+    <Card>
       <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 3 }}>
         <CardMedia
           component="img"

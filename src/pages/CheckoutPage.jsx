@@ -399,7 +399,7 @@ const CheckoutPage = () => {
 
   return (
     <PageTransition>
-    <Box sx={{ py: {sm:1 , md: 2} } }>
+    <Box>
       <Grid container spacing={3}>
         {/* Left: Forms */}
         <Grid item xs={12} md={8}>
