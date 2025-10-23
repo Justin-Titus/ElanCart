@@ -611,7 +611,7 @@ const CheckoutPage = () => {
 
         {/* Right: Order Summary */}
         <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ p: 3, position: 'sticky', top: 20, borderRadius: 3 }}>
+          <Paper elevation={2} sx={{ p: 3, position: 'sticky', top: 'var(--appbar-height, 72px)', borderRadius: 3 }}>
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Order Summary</Typography>
             <Stack spacing={1}>
               {checkoutItems.map(item => (

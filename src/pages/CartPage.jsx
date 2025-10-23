@@ -140,7 +140,7 @@ const CartPage = () => {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <Card sx={{ position: 'sticky', top: 20 }}>
+          <Card sx={{ position: 'sticky', top: 'var(--appbar-height, 72px)' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Order Summary

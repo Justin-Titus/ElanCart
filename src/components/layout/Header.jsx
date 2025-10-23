@@ -82,6 +82,7 @@ const Header = memo(() => {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const mobileSearchInputRef = useRef(null);
+  const toolbarRef = useRef(null);
 
   const { isAuthenticated } = useUser();
   
@@ -202,6 +203,21 @@ const Header = memo(() => {
     return undefined;
   }, [mobileSearchOpen]);
 
+  // Measure the toolbar height and expose it as a CSS variable so other components can stick below the navbar
+  useEffect(() => {
+    const setAppBarHeight = () => {
+      try {
+        const height = toolbarRef.current ? Math.ceil(toolbarRef.current.offsetHeight) : 72;
+        document.documentElement.style.setProperty('--appbar-height', `${height}px`);
+      } catch {
+        // ignore in test environments
+      }
+    };
+    setAppBarHeight();
+    window.addEventListener('resize', setAppBarHeight);
+    return () => window.removeEventListener('resize', setAppBarHeight);
+  }, []);
+
   return (
     <AppBar
       position="sticky"
@@ -221,7 +237,7 @@ const Header = memo(() => {
         transition: 'background 0.3s, box-shadow 0.3s',
       }}
     >
-      <Toolbar sx={{ justifyContent: 'space-between', gap: 2, minHeight: { xs: 56, md: 72 } }}>
+  <Toolbar ref={toolbarRef} sx={{ justifyContent: 'space-between', gap: 2, minHeight: { xs: 56, md: 72 } }}>
         <Box
           sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 1.2 }}
           onClick={handleLogoClick}
