@@ -135,7 +135,7 @@ const Footer = () => {
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={8}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center" justifyContent="flex-start">
-              <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
+              <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
                 {/** Payment logos */}
                 {[
                   { name: 'Visa', src: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png' },
