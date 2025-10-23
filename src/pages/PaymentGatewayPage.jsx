@@ -365,7 +365,7 @@ const PaymentGatewayPage = () => {
     <>
       {ProcessingModal}
       
-      <Box sx={{ minHeight: '80vh', py: 4, opacity: processing ? 0.5 : 1, pointerEvents: processing ? 'none' : 'auto', transition: 'opacity 0.3s' }}>
+      <Box sx={{ minHeight: '80vh', opacity: processing ? 0.5 : 1, pointerEvents: processing ? 'none' : 'auto', transition: 'opacity 0.3s' }}>
         <Box sx={{ maxWidth: 600, mx: 'auto' }}>
         {/* Header */}
         <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 3, bgcolor: 'primary.main', color: 'white' }}>
@@ -542,7 +542,7 @@ const PaymentGatewayPage = () => {
                   onChange={(e) => setUpiId(e.target.value)}
                   placeholder="yourname@upi"
                   error={!!fieldErrors.upiId}
-                  helperText={fieldErrors.upiId || 'Enter your UPI ID (e.g., 9876543210@paytm)'}
+                  helperText={fieldErrors.upiId || 'Enter your UPI ID (e.g., 9876543210@upi)'}
                   disabled={processing}
                   InputProps={{
                     startAdornment: (
