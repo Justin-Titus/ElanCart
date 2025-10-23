@@ -93,10 +93,10 @@ const Footer = () => {
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>Connect with us</Typography>
             <Box sx={{ mb: 1 }}>
-              <IconButton size="small" href="#" aria-label="Facebook"><Facebook fontSize="small" /></IconButton>
-              <IconButton size="small" href="#" aria-label="Twitter"><Twitter fontSize="small" /></IconButton>
-              <IconButton size="small" href="#" aria-label="Instagram"><Instagram fontSize="small" /></IconButton>
-              <IconButton size="small" href="#" aria-label="YouTube"><YouTube fontSize="small" /></IconButton>
+              <IconButton size="small" component="a" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook fontSize="small" /></IconButton>
+              <IconButton size="small" component="a" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter fontSize="small" /></IconButton>
+              <IconButton size="small" component="a" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram fontSize="small" /></IconButton>
+              <IconButton size="small" component="a" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><YouTube fontSize="small" /></IconButton>
             </Box>
 
             <Typography variant="body2" sx={{ mb: 1 }}>Subscribe to our newsletter</Typography>
