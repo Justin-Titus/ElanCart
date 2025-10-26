@@ -16,7 +16,6 @@ import {
 import {
   ShoppingCart,
   Search as SearchIcon,
-  Store,
   FavoriteBorder,
   Menu as MenuIcon,
   AccountCircle,
@@ -268,7 +267,13 @@ const Header = memo(() => {
           sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 1.2 }}
           onClick={handleLogoClick}
         >
-          <Store sx={{ mr: 1, fontSize: 32, color: 'primary.main' }} />
+          {/* Brand image (place your logo at public/assets/elan-logo.png) */}
+          <Box
+            component="img"
+            src="/assets/elan-cart.png"
+            alt="ElanCart"
+            sx={{ width: { xs: 40, md: 56 }, height: { xs: 40, md: 56 }, objectFit: 'contain', mr: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap

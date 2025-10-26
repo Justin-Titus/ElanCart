@@ -27,7 +27,6 @@ import {
 } from "@mui/icons-material";
 import { useLocale } from "../../contexts/useLocale";
 import { PartnerLogoPlaceholder } from "./FooterAssets";
-import { Store } from "@mui/icons-material";
 
 const Footer = () => {
   const [newsletterEmail, setNewsletterEmail] = React.useState("");
@@ -75,7 +74,8 @@ const Footer = () => {
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={3}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-              <Store sx={{ color: 'primary.main', fontSize: 28 }} />
+              {/* Brand logo image — place logo at public/assets/elan-logo.png */}
+              <Box component="img" src="/assets/elan-cart.png" alt="ElanCart" sx={{ width: { xs: 40, sm: 48 }, height: { xs: 40, sm: 48 }, objectFit: 'contain' }} />
               <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1.1 }}>
                 ElanCart
               </Typography>
