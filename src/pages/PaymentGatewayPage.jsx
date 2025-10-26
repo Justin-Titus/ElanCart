@@ -192,6 +192,13 @@ const PaymentGatewayPage = () => {
       clearCart();
     }
 
+    // Clear any saved checkout draft — order completed
+    try {
+      sessionStorage.removeItem('ecommerce-checkout-draft');
+    } catch {
+      /* ignore */
+    }
+
     // Navigate to success page (replace to prevent back navigation to gateway)
     setTimeout(() => {
       navigate('/payment-success', { 
@@ -251,6 +258,17 @@ const PaymentGatewayPage = () => {
 
       completeOrder(paymentDetails);
     }, 2600);
+  };
+
+  const handleCancelPayment = () => {
+    if (processing) return;
+    try {
+      sessionStorage.removeItem('ecommerce-checkout-draft');
+    } catch {
+      // ignore
+    }
+    // Return user to checkout (draft cleared)
+    navigate('/checkout', { replace: true });
   };
 
   // Processing Modal - Memoized to prevent re-renders
@@ -616,11 +634,23 @@ const PaymentGatewayPage = () => {
              `Pay ${formatINR(orderData.amounts.totalINR)}`}
           </Button>
 
-          <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Lock sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
-            <Typography variant="caption" color="text.secondary">
-              Your payment is secured with 256-bit SSL encryption
-            </Typography>
+          <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Lock sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
+              <Typography variant="caption" color="text.secondary">
+                Your payment is secured with 256-bit SSL encryption
+              </Typography>
+            </Box>
+
+            <Button
+              variant="text"
+              color="inherit"
+              onClick={handleCancelPayment}
+              disabled={processing}
+              sx={{ textTransform: 'none', fontSize: '0.95rem' }}
+            >
+              Cancel Payment
+            </Button>
           </Box>
         </Paper>
         </Box>

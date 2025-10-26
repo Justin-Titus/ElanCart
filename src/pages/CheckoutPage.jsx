@@ -194,6 +194,32 @@ const CheckoutPage = () => {
   // Intentionally include shipping.address1 in deps to avoid stale check but avoid overwriting edits
   }, [user]);
 
+  // Restore draft if returning from payment gateway or if a draft exists
+  React.useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem('ecommerce-checkout-draft');
+      if (raw) {
+        const draft = JSON.parse(raw);
+        // Only restore if draft looks valid
+        if (draft && typeof draft === 'object') {
+          // Restore fields (do not override user profile if values already present unless draft has them)
+          setContact(prev => ({ ...prev, ...(draft.contact || {}) }));
+          setShipping(prev => ({ ...prev, ...(draft.shipping || {}) }));
+          setBillingSame(Boolean(draft.billingSame));
+          setBilling(prev => ({ ...prev, ...(draft.billing || {}) }));
+          setDeliveryMethod(draft.deliveryMethod || 'standard');
+          setPaymentMethod(draft.paymentMethod || 'card');
+          setCard(prev => ({ ...prev, ...(draft.card || {}) }));
+          setUpi(prev => ({ ...prev, ...(draft.upi || {}) }));
+          setAgree(Boolean(draft.agree));
+          // Note: checkoutItems are determined from cart or buyNow; we do not override items here
+        }
+      }
+    } catch {
+      // ignore JSON/ storage errors
+    }
+  }, []);
+
   const [billingSame, setBillingSame] = React.useState(true);
   const [billing, setBilling] = React.useState({
     address1: '', address2: '', city: '', state: '', postalCode: '', country: 'India'
@@ -389,13 +415,35 @@ const CheckoutPage = () => {
     }
 
     // Navigate to payment gateway for all payment methods
-    navigate('/payment-gateway', { 
-      state: { 
+    try {
+      // Save a checkout draft so if the user navigates back from the
+      // payment gateway their entered form data is preserved.
+      const draft = {
+        contact,
+        shipping,
+        billingSame,
+        billing,
+        deliveryMethod,
+        paymentMethod,
+        card,
+        upi,
+        agree,
+        checkoutItems,
+        buyNowMode
+      };
+      sessionStorage.setItem('ecommerce-checkout-draft', JSON.stringify(draft));
+    } catch {
+      // ignore storage errors
+    }
+
+    navigate('/payment-gateway', {
+      state: {
         orderData,
-        buyNowMode 
-      } 
+        buyNowMode
+      }
     });
   };
+
 
   return (
     <PageTransition>
@@ -437,7 +485,7 @@ const CheckoutPage = () => {
               <Grid item xs={12}>
                 <TextField label="Address line 2 (optional)" fullWidth value={shipping.address2} onChange={e => setShipping(v => ({ ...v, address2: e.target.value }))} />
               </Grid>
-              <Grid item xs={6} sm={3}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="Postal code"
                   id="postalCode"
@@ -462,7 +510,7 @@ const CheckoutPage = () => {
                   helperText={fieldErrors.city}
                 />
               </Grid>
-              <Grid item xs={6} sm={3}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="State"
                   id="state"
@@ -474,7 +522,7 @@ const CheckoutPage = () => {
                   helperText={fieldErrors.state}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="Country"
                   fullWidth
@@ -521,19 +569,7 @@ const CheckoutPage = () => {
                     helperText={fieldErrors.billingCity}
                   />
                 </Grid>
-                <Grid item xs={6} sm={3}>
-                  <TextField
-                    id="billingState"
-                    label="State"
-                    fullWidth
-                    value={billing.state}
-                    onChange={e => { setBilling(v => ({ ...v, state: e.target.value.replace(/\d/g, '') })); clearFieldError('billingState', e.target.value); }}
-                    onBlur={() => { const v = (billing.state || '').trim(); if (!validateNotEmpty(v)) setFieldError('billingState', 'State required.'); else if (/\d/.test(v)) setFieldError('billingState', 'State cannot contain numbers.'); else clearFieldError('billingState', v); }}
-                    error={!!fieldErrors.billingState}
-                    helperText={fieldErrors.billingState}
-                  />
-                </Grid>
-                <Grid item xs={6} sm={3}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     id="billingPostalCode"
                     label="Postal code"
@@ -546,7 +582,19 @@ const CheckoutPage = () => {
                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="billingState"
+                    label="State"
+                    fullWidth
+                    value={billing.state}
+                    onChange={e => { setBilling(v => ({ ...v, state: e.target.value.replace(/\d/g, '') })); clearFieldError('billingState', e.target.value); }}
+                    onBlur={() => { const v = (billing.state || '').trim(); if (!validateNotEmpty(v)) setFieldError('billingState', 'State required.'); else if (/\d/.test(v)) setFieldError('billingState', 'State cannot contain numbers.'); else clearFieldError('billingState', v); }}
+                    error={!!fieldErrors.billingState}
+                    helperText={fieldErrors.billingState}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Country"
                     fullWidth
