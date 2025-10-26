@@ -513,6 +513,7 @@ const Footer = () => {
                   onChange={(e) => setLang(e.target.value)}
                 >
                   <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="ta">தமிழ்</MenuItem>
                   <MenuItem value="hi">हिन्दी</MenuItem>
                 </Select>
               </FormControl>

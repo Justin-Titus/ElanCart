@@ -48,11 +48,11 @@ const AboutPage = () => {
         ElanCart started as a small collective of designers, product enthusiasts, and engineers determined to build an online store that values depth over endless scrolling. Today we curate collections from trusted partners around the world, pairing them with inspiration, editorial storytelling, and services that help every shopper feel confident.
       </p>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} alignItems="stretch">
         {pillars.map((pillar) => {
           const IconComponent = pillar.icon;
           return (
-            <Grid item xs={12} md={6} key={pillar.title}>
+            <Grid item xs={12} md={6} key={pillar.title} sx={{ display: 'flex' }}>
               <div className="about-page-pillar-card">
                 <Stack direction="row" spacing={2} alignItems="center">
                   <IconComponent color="primary" />

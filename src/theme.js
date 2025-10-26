@@ -16,9 +16,13 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-    h4: {
-      fontWeight: 700,
-    },
+    // Use Poppins for headings for a clean, professional look; Inter remains the UI/body font
+    h1: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 800 },
+    h2: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 700 },
+    h3: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 700 },
+    h4: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 700 },
+    h5: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 600 },
+    h6: { fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 600 },
     button: {
       textTransform: 'none',
       fontWeight: 600,

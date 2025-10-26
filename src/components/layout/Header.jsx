@@ -106,13 +106,24 @@ const Header = memo(() => {
   };
 
   const handleNavClick = useCallback((path) => {
-    if (path !== '/products') {
-      setFilters({ searchTerm: '' });
-      setSearchTerm('');
+    // Navigate first so the header/page unmounts immediately.
+    // Defer heavy filter updates to avoid visible re-renders on the current page.
+    if (location.pathname !== path) {
+      navigate(path);
     }
-    navigate(path);
     setMobileNavAnchor(null);
-  }, [navigate, setFilters]);
+
+    if (path !== '/products') {
+      setSearchTerm('');
+      try {
+        startTransition(() => {
+          setFilters({ searchTerm: '' });
+        });
+      } catch {
+        setFilters({ searchTerm: '' });
+      }
+    }
+  }, [navigate, setFilters, location.pathname, setSearchTerm]);
 
   const handleMobileMenuOpen = (event) => {
     setMobileNavAnchor(event.currentTarget);
@@ -262,6 +273,7 @@ const Header = memo(() => {
             variant="h5"
             noWrap
             component="div"
+            className="brand-font"
             sx={{ fontWeight: 800, letterSpacing: '0.02em', color: 'text.primary', fontSize: { xs: '1.3rem', md: '2rem' } }}
           >
             ElanCart
