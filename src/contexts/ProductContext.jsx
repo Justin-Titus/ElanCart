@@ -52,10 +52,10 @@ const initialState = {
   filters: {
     category: '',
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: Infinity,
     searchTerm: ''
   },
-  sortBy: 'name-asc',
+  sortBy: '',
   currentPage: 1,
   itemsPerPage: 12
 };
@@ -218,18 +218,16 @@ export const ProductProvider = ({ children }) => {
       }
     }
 
-    filtered = filtered.filter(product =>
-      product.price >= state.filters.minPrice && product.price <= state.filters.maxPrice
-    );
+    // Apply price filtering only when bounds are provided. Default to wide-open range
+    const minPriceFilter = typeof state.filters.minPrice === 'number' ? state.filters.minPrice : -Infinity;
+    const maxPriceFilter = state.filters.maxPrice === Infinity || typeof state.filters.maxPrice === 'number'
+      ? state.filters.maxPrice
+      : Infinity;
+
+    filtered = filtered.filter(product => product.price >= minPriceFilter && product.price <= maxPriceFilter);
 
     // Apply sorting
     switch (state.sortBy) {
-      case 'name-asc':
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 'name-desc':
-        filtered.sort((a, b) => b.title.localeCompare(a.title));
-        break;
       case 'price-asc':
         filtered.sort((a, b) => a.price - b.price);
         break;
@@ -239,6 +237,7 @@ export const ProductProvider = ({ children }) => {
       case 'rating-desc':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
+      // empty or unknown sort -> keep original order
       default:
         break;
     }

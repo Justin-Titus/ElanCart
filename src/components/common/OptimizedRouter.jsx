@@ -1,5 +1,5 @@
 import React, { memo, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Box, CircularProgress } from '@mui/material';
 import ProtectedRoute from './ProtectedRoute';
 import RoutePreloader from './RoutePreloader';
@@ -66,7 +66,7 @@ const OptimizedRouter = memo(() => {
             <PaymentSuccessPage />
           </ProtectedRoute>
         } />
-        <Route path="*" element={<div>Page not found - <a href="/">Go home</a></div>} />
+  <Route path="*" element={<div>Page not found - <Link to="/">Go home</Link></div>} />
       </Routes>
       </Suspense>
     </>

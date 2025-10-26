@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback, startTransition } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -130,9 +130,17 @@ const Header = memo(() => {
 
   const handleSearchSubmit = useCallback(() => {
     const trimmed = (searchTerm || '').trim();
-    setFilters({ searchTerm: trimmed });
+    // Navigate first so the header/page unmounts immediately, then
+    // update filters as a non-urgent transition to avoid visible re-renders.
     if (location.pathname !== '/products') {
       navigate('/products');
+    }
+    try {
+      startTransition(() => {
+        setFilters({ searchTerm: trimmed });
+      });
+    } catch {
+      setFilters({ searchTerm: trimmed });
     }
     setMobileSearchOpen(false);
   }, [searchTerm, setFilters, location.pathname, navigate]);
@@ -161,9 +169,16 @@ const Header = memo(() => {
   };
 
   const handleLogoClick = () => {
-    setSearchTerm('');
-    setFilters({ searchTerm: '' });
+    // Navigate first, then clear filters to avoid a visible re-render on the current page
     navigate('/');
+    setSearchTerm('');
+    try {
+      startTransition(() => {
+        setFilters({ searchTerm: '' });
+      });
+    } catch {
+      setFilters({ searchTerm: '' });
+    }
     setMobileNavAnchor(null);
   };
 

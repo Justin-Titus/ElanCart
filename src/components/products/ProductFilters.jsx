@@ -62,6 +62,13 @@ const ProductFilters = memo(() => {
 
   const [selectedPriceKey, setSelectedPriceKey] = useState(detectSelectedPriceKey);
 
+  // Keep the selected price dropdown in sync with external filter changes
+  // (e.g., when filters are updated programmatically elsewhere).
+  React.useEffect(() => {
+    setSelectedPriceKey(detectSelectedPriceKey());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters?.minPrice, filters?.maxPrice, priceOptions]);
+
   const handleCategoryChange = (event) => setFilters({ category: event.target.value });
   const handleSortChange = (event) => setSortBy(event.target.value);
 
@@ -79,14 +86,13 @@ const ProductFilters = memo(() => {
   };
 
   const handleClearFilters = () => {
-    setFilters({ category: '', minPrice: 0, maxPrice: 1000, searchTerm: '' });
+    setFilters({ category: '', minPrice: 0, maxPrice: Infinity, searchTerm: '' });
     setSelectedPriceKey('any');
-    setSortBy('name-asc');
+    setSortBy('');
   };
 
   const sortOptions = [
-    { value: 'name-asc', label: 'Name (A-Z)' },
-    { value: 'name-desc', label: 'Name (Z-A)' },
+    // Removed name-based sorting as requested
     { value: 'price-asc', label: 'Price (Low to High)' },
     { value: 'price-desc', label: 'Price (High to Low)' },
     { value: 'rating-desc', label: 'Rating (High to Low)' }

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, startTransition } from "react";
 import { Box, Typography, Grid, Paper } from "@mui/material";
 import { motion } from 'framer-motion';
 import {
@@ -88,8 +88,18 @@ const HomePage = memo(() => {
     .slice(0, 8); // show up to 8 categories
 
   const handleCategoryClick = (category) => {
-    setFilters({ category });
+    // Navigate first so the HomePage unmounts immediately. Defer the
+    // filter update as a non-urgent transition so it doesn't cause a
+    // visible re-render/flicker of the category cards before navigation.
     navigate("/products");
+    try {
+      startTransition(() => {
+        setFilters({ category });
+      });
+    } catch {
+      // Fallback if startTransition isn't available for any reason
+      setFilters({ category });
+    }
   };
 
   const MotionBox = motion.create(Box);
@@ -98,6 +108,13 @@ const HomePage = memo(() => {
   // Small component for category card so each card can use the in-view hook
   function CategoryCard({ cat, idx }) {
     const [ref, inView] = useInView({ threshold: 0.14 });
+    const hasAnimatedRef = React.useRef(false);
+
+    // remember that we've animated once for this card so re-renders
+    // (that don't unmount the element) won't replay the entrance animation
+    React.useEffect(() => {
+      if (inView) hasAnimatedRef.current = true;
+    }, [inView]);
 
     const sx = {
       cursor: "pointer",
@@ -120,8 +137,9 @@ const HomePage = memo(() => {
           onClick={() => handleCategoryClick(cat.name)}
           elevation={1}
           sx={sx}
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          // apply initial only when the card hasn't animated yet
+          initial={hasAnimatedRef.current ? false : { opacity: 0, y: 12 }}
+          animate={inView || hasAnimatedRef.current ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.45, delay: idx * 0.06 }}
         >
           <Box

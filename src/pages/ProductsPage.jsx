@@ -25,7 +25,7 @@ const ProductsPage = memo(() => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   // const navigate = useNavigate();
-  const { getPaginatedProducts, filters, setFilters } = useProducts();
+  const { getPaginatedProducts, filters, setFilters, sortBy, setSortBy } = useProducts();
   let totalProducts = 0;
   try {
     const gp = getPaginatedProducts();
@@ -173,11 +173,31 @@ const ProductsPage = memo(() => {
                 )}
 
                 {/* Price range (show only if not defaults) */}
-                {((filters.minPrice || 0) > 0 || (filters.maxPrice || 1000) < 1000) && (
+                {((filters.minPrice || 0) > 0 || filters.maxPrice !== Infinity) && (
                   <Chip
-                    label={`Price: ₹${Math.round((filters.minPrice || 0) * 83)} - ₹${Math.round((filters.maxPrice || 1000) * 83)}`}
+                    label={(() => {
+                      const lo = Math.round((filters.minPrice || 0) * 83);
+                      const hi = filters.maxPrice === Infinity ? null : Math.round(filters.maxPrice * 83);
+                      return hi ? `Price: ₹${lo} - ₹${hi}` : `Price: ₹${lo}+`;
+                    })()}
                     size="small"
-                    onDelete={() => setFilters({ minPrice: 0, maxPrice: 1000 })}
+                    onDelete={() => setFilters({ minPrice: 0, maxPrice: Infinity })}
+                  />
+                )}
+
+                {/* Sort (show when a sort is active) */}
+                {sortBy && sortBy !== '' && (
+                  <Chip
+                    label={(() => {
+                      switch (sortBy) {
+                        case 'price-asc': return 'Sort: Price (Low → High)';
+                        case 'price-desc': return 'Sort: Price (High → Low)';
+                        case 'rating-desc': return 'Sort: Rating (High → Low)';
+                        default: return `Sort: ${sortBy}`;
+                      }
+                    })()}
+                    size="small"
+                    onDelete={() => setSortBy('')}
                   />
                 )}
               </Stack>

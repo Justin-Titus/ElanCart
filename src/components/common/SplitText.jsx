@@ -79,6 +79,15 @@ const SplitText = ({
         reduceWhiteSpace: false,
         onSplit: self => {
           assignTargets(self);
+          // Make the parent visible only when GSAP has prepared the split
+          // This prevents the plain text from briefly showing before the
+          // split animation is applied. We set inline style so we don't
+          // depend on external CSS changes.
+          try {
+            el.style.visibility = 'visible';
+          } catch {
+            /* noop */
+          }
           const tween = gsap.fromTo(
             targets,
             { ...from },
@@ -145,7 +154,10 @@ const SplitText = ({
       display: 'inline-block',
       whiteSpace: 'normal',
       wordWrap: 'break-word',
-      willChange: 'transform, opacity'
+      willChange: 'transform, opacity',
+      // Hide the text until GSAP has split it and attached the animation
+      // — avoids a flash of unanimated text on first paint.
+      visibility: 'hidden'
     };
     const classes = `split-parent ${className}`;
     switch (tag) {
