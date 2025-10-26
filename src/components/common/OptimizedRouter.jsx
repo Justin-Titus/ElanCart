@@ -17,6 +17,7 @@ const LoginPage = React.lazy(() => import('../../pages/LoginPage'));
 const CheckoutPage = React.lazy(() => import('../../pages/CheckoutPage'));
 const PaymentGatewayPage = React.lazy(() => import('../../pages/PaymentGatewayPage'));
 const PaymentSuccessPage = React.lazy(() => import('../../pages/PaymentSuccessPage'));
+const NotFoundPage = React.lazy(() => import('../../pages/NotFoundPage'));
 
 // Minimal loading component
 const MinimalLoader = memo(() => (
@@ -66,7 +67,7 @@ const OptimizedRouter = memo(() => {
             <PaymentSuccessPage />
           </ProtectedRoute>
         } />
-  <Route path="*" element={<div>Page not found - <Link to="/">Go home</Link></div>} />
+  <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </Suspense>
     </>
