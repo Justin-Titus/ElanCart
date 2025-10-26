@@ -1,0 +1,36 @@
+.card-spotlight {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--card-border, #e2e8f0);
+  background-color: var(--card-bg, #fff);
+  padding: 1.5rem;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  /* darker blue tint matching site primary (#1e40af) for a stronger hover highlight */
+  --spotlight-color: rgba(30, 64, 175, 0.14);
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.card-spotlight:hover::before,
+.card-spotlight:focus-within::before {
+  opacity: 1;
+}
+
+/* Small accessibility tweak: reveal subtle focus outline for keyboard users */
+.card-spotlight:focus-within {
+  outline: 2px solid rgba(99,102,241,0.12);
+  outline-offset: 2px;
+}

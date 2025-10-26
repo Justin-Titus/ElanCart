@@ -7,6 +7,7 @@ import {
   Paper,
   Stack
 } from '@mui/material';
+import SpotlightCard from '../components/common/SpotlightCard';
 import {
   Diversity3,
   Timeline,
@@ -65,12 +66,12 @@ const AboutPage = () => {
         })}
       </Grid>
 
-      <div className="about-page-promise">
+      <SpotlightCard className="about-page-promise" spotlightColor="rgba(30,64,175,0.14)">
         <div className="about-page-promise-title">Our promise</div>
         <div className="about-page-promise-desc">
           We stand behind every order. That means clear delivery estimates, responsive communication, flexible returns, and a product guarantee that reflects our trust in the brands we stock. If an experience ever falls short, our support team is empowered to make it right.
         </div>
-      </div>
+      </SpotlightCard>
     </div>
     </PageTransition>
   );
