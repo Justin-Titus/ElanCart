@@ -87,7 +87,7 @@ const CartPage = () => {
           startIcon={<ArrowBack />}
           onClick={handleContinueShopping}
         >
-          {!isMobile && 'Continue Shopping'}
+          Continue Shopping
         </Button>
       </Box>
       </motion.div>

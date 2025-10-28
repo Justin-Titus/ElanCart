@@ -1,0 +1,2 @@
+# Ignore helper script that may contain non-UTF8/binary content used only in local testing
+clear_cache.js

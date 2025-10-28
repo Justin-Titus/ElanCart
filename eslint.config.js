@@ -5,7 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // ignore built output and local helper that may contain non-UTF8 bytes
+  globalIgnores(['dist', 'clear_cache.js']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

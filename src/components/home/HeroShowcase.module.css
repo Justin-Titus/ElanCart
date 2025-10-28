@@ -197,7 +197,7 @@
     padding: 0.6rem 1rem;
     /* slightly reduce overall hero height on mobile */
     min-height:540px;
-    max-height:680px;
+    max-height:700px;
   }
 
   .cardSwapWrapper {
@@ -205,7 +205,7 @@
     height: calc(360px * 0.7);
     /* remove horizontal nudge on mobile to avoid overlap */
     transform: translateX(120px);
-    transform: translateY(-90px);
+    transform: translateY(-115px);
   }
 
   .showcaseCard {

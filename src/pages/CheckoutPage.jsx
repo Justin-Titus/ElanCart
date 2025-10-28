@@ -308,14 +308,25 @@ const CheckoutPage = () => {
 
   const { items: checkoutItems, buyNowMode } = getCheckoutData();
 
-  // Clear buyNow data when component unmounts if we're in cart mode
+  // Clear stale buyNow data on mount if we explicitly came from the cart
+  // and ensure buyNow data is removed when the checkout unmounts while
+  // handling a buy-now flow (user navigates back without completing).
   React.useEffect(() => {
+    if (location.state?.fromCart && buyNowData) {
+      // If user reached checkout from the cart, any lingering buyNow data
+      // should be removed immediately to avoid mixing flows.
+      clearBuyNowData();
+    }
+
     return () => {
-      if (location.state?.fromCart && buyNowData) {
+      // If this checkout was in buyNow mode and the component unmounts
+      // (user navigated back or away without placing the order), clear
+      // the transient buyNow data so it doesn't persist unexpectedly.
+      if (buyNowMode) {
         clearBuyNowData();
       }
     };
-  }, [location.state?.fromCart, buyNowData, clearBuyNowData]);
+  }, [location.state?.fromCart, buyNowData, buyNowMode, clearBuyNowData]);
 
   // Don't render until buyNow hook has loaded
   if (buyNowLoading) {

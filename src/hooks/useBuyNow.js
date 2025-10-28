@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const BUYNOW_STORAGE_KEY = 'buyNowData';
 
@@ -23,7 +23,7 @@ export const useBuyNow = () => {
   };
 
   // Load buyNow data
-  const loadBuyNowData = () => {
+  const loadBuyNowData = useCallback(() => {
     try {
       const storedData = sessionStorage.getItem(BUYNOW_STORAGE_KEY);
       
@@ -50,7 +50,7 @@ export const useBuyNow = () => {
       clearBuyNowData();
     }
     return null;
-  };
+  }, []);
 
   // Clear buyNow data
   const clearBuyNowData = () => {
@@ -66,7 +66,7 @@ export const useBuyNow = () => {
   useEffect(() => {
     loadBuyNowData();
     setIsLoading(false);
-  }, []);
+  }, [loadBuyNowData]);
 
   return {
     buyNowData,
