@@ -1,6 +1,6 @@
 # ElanCart
 
-ElanCart is a robust and modern shopping cart application tailored for e-commerce platforms. It delivers a fast, intuitive, and responsive user experience, making it easy for customers to browse products, manage their cart, and complete purchases. The project leverages JavaScript for dynamic interactions, CSS for sleek styling, Python for backend logic (where applicable), and HTML for semantic structure.
+ElanCart is a robust and modern shopping cart application tailored for e-commerce platforms. It delivers a fast, intuitive, and responsive user experience, making it easy for customers to browse products, manage their cart, and complete purchases. The project leverages JavaScript for dynamic interactions, CSS for styling, and HTML for semantic structure. (If you add a Python backend, include backend docs and a requirements file as needed.)
 
 ---
 
@@ -26,24 +26,22 @@ ElanCart is a robust and modern shopping cart application tailored for e-commerc
    ```
 
 2. **Install dependencies**
-   - For Node.js frontend:
+   - For the Node.js frontend:
      ```bash
      npm install
      ```
-   - For Python backend (if used):
-     ```bash
-     pip install -r requirements.txt
-     ```
+   - If you add a Python backend later, install its dependencies as documented in that backend's README or `requirements.txt`.
 
 3. **Run the application**
-   - Frontend:
+   - Frontend (development using Vite):
      ```bash
-     npm start
+     npm run dev
      ```
-   - Backend:
+   - Build for production:
      ```bash
-     python app.py
+     npm run build
      ```
+   - If this repository is paired with a backend, run the backend according to its own documentation.
 
 ---
 
@@ -60,19 +58,19 @@ ElanCart is a robust and modern shopping cart application tailored for e-commerc
 
 Contributions are welcome and appreciated! To contribute:
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to your branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request.
+3. Fork the repository.
+4. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+6. Push to your branch (`git push origin feature/AmazingFeature`).
+7. Open a Pull Request.
 
-Please review the [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+If this repository contains a `CONTRIBUTING.md` file, please follow its guidelines; otherwise open an issue or PR describing the change.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is intended to be licensed under the MIT License. Add a `LICENSE` file to the repository to make the license explicit.
 
 ---
 
