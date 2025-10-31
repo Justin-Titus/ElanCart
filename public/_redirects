@@ -1,0 +1,12 @@
+# Netlify redirects for single-page-app (SPA)
+# Place this file in the `public/` folder so Vite copies it to the production `dist/` on build.
+
+/*    /index.html   200
+
+# Optional: redirect legacy URLs or external hooks to specific paths
+# Example: keep a clean URL for payment success pages (served by SPA)
+/payment-success    /index.html   200
+
+# Block common sensitive paths (optional rule): return 404
+/.env    404
+/.git/*  404

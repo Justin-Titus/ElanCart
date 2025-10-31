@@ -197,7 +197,7 @@ const ProductGrid = memo((props) => {
             {/* Page number buttons - show window around current page */}
             {(() => {
               const pages = [];
-              const maxButtons = 7;
+              const maxButtons = isMobile ? 5 : 7;
               let start = Math.max(1, currentPage - Math.floor(maxButtons / 2));
               let end = start + maxButtons - 1;
               if (end > totalPages) {

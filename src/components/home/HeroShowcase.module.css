@@ -193,28 +193,31 @@
 
 @media (max-width: 640px) {
   .heroContainer {
-    /* reduce vertical padding to give more room for cards */
     padding: 0.6rem 1rem;
-    /* slightly reduce overall hero height on mobile */
-    min-height:540px;
-    max-height:700px;
+    min-height: 540px;
+    max-height: 700px;
   }
 
   .cardSwapWrapper {
-    /* reduce card wrapper height for mobile */
     height: calc(360px * 0.7);
-    /* remove horizontal nudge on mobile to avoid overlap */
-    transform: translateX(120px);
-    transform: translateY(-115px);
+    /* Remove transforms that push cards over the button */
+    transform: none !important;
+    margin-bottom: 0.5rem;
   }
 
   .showcaseCard {
     padding: 1rem;
   }
 
-  /* Make primary CTA smaller on mobile so it doesn't push the carousel down */
+  .actions {
+    z-index: 2;
+    position: relative;
+  }
+
   .primaryButton {
     padding: 0.45rem 0.9rem;
     font-size: 1rem;
+    z-index: 2;
+    position: relative;
   }
 }
