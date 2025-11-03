@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import CardSwap, { Card } from './CardSwap';
 import SplitText from '../common/SplitText';
@@ -123,9 +124,31 @@ const HeroShowcase = () => {
           Explore curated collections, save your favourites, and check out with confidence. We blend modern design with reliable service so every purchase feels rewarding.
         </p>
         <div className={styles.actions}>
-          <button type="button" className={styles.primaryButton} onClick={handleNavigateProducts}>
+          <Button
+            className={styles.primaryButton}
+            onClick={handleNavigateProducts}
+            disableElevation
+            disableRipple
+            disableFocusRipple
+            sx={{
+              background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+              color: '#fff',
+              borderRadius: '999px',
+              fontWeight: 600,
+              fontSize: '1rem',
+              padding: { xs: '0.45rem 0.9rem', md: '0.9rem 2rem' },
+              boxShadow: 'none',
+              '&:hover, &:focus-visible': {
+                background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                boxShadow: '0 18px 30px rgba(37, 99, 235, 0.25)',
+                transform: 'translateY(-1px)'
+              },
+              border: 'none',
+              minWidth: 0
+            }}
+          >
             Start Shopping
-          </button>
+          </Button>
         </div>
       </div>
 
