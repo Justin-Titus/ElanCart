@@ -21,4 +21,5 @@ export default defineConfig({
       },
     },
   },
+  base: '/ElanCart/', // Add this line for GitHub Pages deployment
 });
