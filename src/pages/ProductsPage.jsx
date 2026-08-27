@@ -16,24 +16,29 @@ import ProductFilters from '../components/products/ProductFilters';
 import ProductGrid from '../components/products/ProductGrid';
 const ProductsBanner = lazy(() => import('../components/products/ProductsBanner'));
 const TrustBadges = lazy(() => import('../components/products/TrustBadges'));
-import { useProducts } from '../contexts/ProductContext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectPaginatedProducts,
+  selectFilters,
+  selectSortBy,
+  setFilters as setFiltersAction,
+  setSortBy as setSortByAction
+} from '../store/slices/productsSlice';
 // import { useNavigate } from 'react-router-dom';
 
 const ProductsPage = memo(() => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   // const navigate = useNavigate();
-  const { getPaginatedProducts, filters, setFilters, sortBy, setSortBy } = useProducts();
-  let totalProducts = 0;
-  try {
-    const gp = getPaginatedProducts();
-    totalProducts = gp.totalProducts || 0;
-  } catch (err) {
-    console.error('Error calling getPaginatedProducts in ProductsPage:', err);
-    totalProducts = 0;
-  }
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
+  const sortBy = useSelector(selectSortBy);
+  const paginatedData = useSelector(selectPaginatedProducts);
+  const totalProducts = paginatedData?.totalProducts || 0;
+  const setFilters = (f) => dispatch(setFiltersAction(f));
+  const setSortBy = (s) => dispatch(setSortByAction(s));
 
   // Ref to the product list container so we can scroll to it when searching
   const productsRef = useRef(null);

@@ -32,24 +32,24 @@ import {
   Share,
 } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
-import { useProducts } from "../contexts/ProductContext";
-import { useCart } from "../contexts/CartContext";
-import { useFavourites } from "../contexts/FavouritesContext";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProducts, selectProductsLoading } from "../store/slices/productsSlice";
+import {
+  addToCart,
+  removeFromCart,
+  updateCartItemQuantity,
+  selectCartItem,
+} from "../store/slices/cartSlice";
+import { toggleFavourite, selectIsFavourite } from "../store/slices/favouritesSlice";
 import { useBuyNow } from "../hooks/useBuyNow";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { products, loading } = useProducts();
-  const {
-    addToCart,
-    isInCart,
-    getCartItem,
-    updateCartItemQuantity,
-    removeFromCart,
-  } = useCart();
-  const { toggleFavourite, isFavourite } = useFavourites();
+  const products = useSelector(selectProducts);
+  const loading = useSelector(selectProductsLoading);
   const { storeBuyNowData } = useBuyNow();
 
   // Derive product from products + id so there's no intermediate render where product is null
@@ -107,23 +107,23 @@ const ProductDetailPage = () => {
   };
 
   // Only query cart/favourites when we have a resolved product id to avoid transient mismatches
-  const cartItem = product ? getCartItem(product.id) : null;
-  const inCart = product ? isInCart(product.id) : false;
+  const cartItem = useSelector(selectCartItem(product ? product.id : '__none__'));
+  const inCart = !!cartItem;
 
   // Add to Cart handler
   const handleAddToCart = () => {
     if (!product) return;
     if (product.stock && product.stock < 1) return;
-    addToCart(product, 1);
+    dispatch(addToCart({ ...product, quantity: 1 }));
   };
 
   // Update cart item quantity handler
   const handleUpdateCart = (newQuantity) => {
     if (!product) return;
     if (newQuantity === 0) {
-      removeFromCart(product.id);
+      dispatch(removeFromCart(product.id));
     } else {
-      updateCartItemQuantity(product.id, newQuantity);
+      dispatch(updateCartItemQuantity({ id: product.id, quantity: newQuantity }));
     }
   };
 
@@ -135,7 +135,7 @@ const ProductDetailPage = () => {
   // Favourite handler
   const handleToggleFavourite = () => {
     if (!product) return;
-    toggleFavourite(product);
+    dispatch(toggleFavourite(product));
   };
 
   // Share handler
@@ -160,7 +160,7 @@ const ProductDetailPage = () => {
   };
 
   // Favourite status
-  const favourite = product ? isFavourite(product.id) : false;
+  const favourite = useSelector(selectIsFavourite(product ? product.id : '__none__'));
 
   // While products are loading, show a centered spinner instead of a transient 'Product not found'
   if (loading) {

@@ -13,7 +13,14 @@ import { useTheme, useMediaQuery, Paper } from '@mui/material';
 import { GridView, ViewList } from '@mui/icons-material';
 import { FirstPage, LastPage, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import ProductCard from './ProductCardItem';
-import { useProducts } from '../../contexts/ProductContext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectProductsLoading,
+  selectProductsError,
+  selectCurrentPage,
+  selectPaginatedProducts,
+  setCurrentPage as setCurrentPageAction
+} from '../../store/slices/productsSlice';
 
 const ProductSkeleton = memo(() => (
   <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -31,33 +38,22 @@ const ProductGrid = memo((props) => {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const {
-    loading,
-    error,
-    currentPage,
-    setCurrentPage,
-    getPaginatedProducts
-  } = useProducts();
-
-  const paginatedData = useMemo(() => {
-    try {
-      return getPaginatedProducts();
-    } catch (err) {
-      console.error('Error calling getPaginatedProducts in ProductGrid:', err);
-      return { products: [], totalProducts: 0, totalPages: 0 };
-    }
-  }, [getPaginatedProducts]);
+  const dispatch = useDispatch();
+  const loading = useSelector(selectProductsLoading);
+  const error = useSelector(selectProductsError);
+  const currentPage = useSelector(selectCurrentPage);
+  const paginatedData = useSelector(selectPaginatedProducts);
 
   const { products = [], totalProducts = 0, totalPages = 0 } = paginatedData;
 
   const handlePageChange = useCallback((page) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPageAction(page));
     if (onNavigateToProducts) {
       onNavigateToProducts();
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [setCurrentPage, onNavigateToProducts]);
+  }, [dispatch, onNavigateToProducts]);
 
   const skeletonItems = useMemo(() => 
     Array.from({ length: 8 }, (_, index) => <ProductSkeleton key={index} />)

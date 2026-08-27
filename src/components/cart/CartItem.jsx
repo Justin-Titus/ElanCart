@@ -18,13 +18,14 @@ import {
   Remove,
   Delete
 } from '@mui/icons-material';
-import { useCart } from '../../contexts/CartContext';
+import { useDispatch } from 'react-redux';
+import { updateCartItemQuantity, removeFromCart } from '../../store/slices/cartSlice';
 
 const CartItem = ({ item }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
-  const { updateCartItemQuantity, removeFromCart } = useCart();
+  const dispatch = useDispatch();
 
   const handleNavigateToProduct = () => {
     navigate(`/product/${item.id}`);
@@ -32,14 +33,14 @@ const CartItem = ({ item }) => {
 
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity < 1) {
-      removeFromCart(item.id);
+      dispatch(removeFromCart(item.id));
     } else {
-      updateCartItemQuantity(item.id, newQuantity);
+      dispatch(updateCartItemQuantity({ id: item.id, quantity: newQuantity }));
     }
   };
 
   const handleRemove = () => {
-    removeFromCart(item.id);
+    dispatch(removeFromCart(item.id));
   };
 
   const itemTotal = (item.price * item.quantity * 83).toFixed(2);

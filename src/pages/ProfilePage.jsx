@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PageTransition from '../components/common/PageTransition';
 import { Box, Paper, Typography, Avatar, Button, Divider, Stack, IconButton, TextField, Chip, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card, CardContent, CardActions, useTheme, useMediaQuery } from '@mui/material';
 import OrderDetailDialog from '../components/common/OrderDetailDialog';
-import { useUser } from '../contexts/useUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser, logout, updateUser } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import EditAddressDialog from '../components/common/EditAddressDialog';
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,7 +17,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const ProfilePage = () => {
 
-  const { user, logout, updateUser } = useUser();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
@@ -45,7 +47,7 @@ const ProfilePage = () => {
     <PageTransition>
     <Box sx={{ maxWidth: 1200, mx: 'auto', py: {sm:1, md:2}, px: 2 }}>
       {/* Header Section - Formal Card */}
-      <Paper elevation={1} sx={{ p: 3, mb: 3, borderRadius: 3, bgcolor: 'background.paper' }}>
+      <Paper elevation={1} sx={{ p: 3, mb: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} alignItems="center">
           <Avatar sx={{ width: 88, height: 88, fontSize: 36, bgcolor: 'primary.main', color: 'white' }}>
             {user.name ? user.name[0].toUpperCase() : user.email[0].toUpperCase()}
@@ -66,7 +68,7 @@ const ProfilePage = () => {
                     if (e.key === 'Enter') {
                       const val = nameInput.trim();
                       if (val.length < 2) { setNameError('Name must be at least 2 characters'); return; }
-                      updateUser({ name: val }); setEditName(false);
+                      dispatch(updateUser({ name: val })); setEditName(false);
                     }
                     if (e.key === 'Escape') {
                       setNameInput(user?.name || ''); setNameError(''); setEditName(false);
@@ -78,7 +80,7 @@ const ProfilePage = () => {
                 <IconButton size="small" onClick={() => {
                   const val = nameInput.trim();
                   if (val.length < 2) { setNameError('Name must be at least 2 characters'); return; }
-                  updateUser({ name: val }); setEditName(false);
+                  dispatch(updateUser({ name: val })); setEditName(false);
                 }} color="primary">
                   <SaveIcon fontSize="small" />
                 </IconButton>
@@ -101,14 +103,14 @@ const ProfilePage = () => {
               <Chip label={`₹${totalSpent.toFixed(2)} Spent`} variant="outlined" sx={{ fontWeight: 600 }} />
             </Stack>
           </Box>
-          <Button variant="contained" color="error" onClick={logout} sx={{ px: 3 }}>Logout</Button>
+          <Button variant="contained" color="error" onClick={() => dispatch(logout())} sx={{ px: 3 }}>Logout</Button>
         </Stack>
       </Paper>
 
       <Grid container spacing={3}>
         {/* Shipping Address Section */}
         <Grid item xs={12} md={5}>
-          <Paper elevation={1} sx={{ p: 3, borderRadius: 3, height: '100%' }}>
+          <Paper elevation={1} sx={{ p: 3, borderRadius: 2, height: '100%' }}>
             <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
               <LocationOnOutlinedIcon sx={{ color: 'primary.main' }} />
               <Typography variant="h6" sx={{ fontWeight: 600, flex: 1 }}>Shipping Address</Typography>
@@ -116,7 +118,7 @@ const ProfilePage = () => {
                 <EditIcon fontSize="small" />
               </IconButton>
             </Stack>
-            <Box sx={{ bgcolor: '#f8f9fa', p: 2.5, borderRadius: 2, minHeight: 100 }}>
+            <Box sx={{ bgcolor: 'background.default', p: 2.5, borderRadius: 2, minHeight: 100, border: '1px solid', borderColor: 'divider' }}>
               <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
                 {user.address || (
                   <span style={{ fontStyle: 'italic', color: '#999' }}>
@@ -136,14 +138,14 @@ const ProfilePage = () => {
               onClose={() => setEditAddressOpen(false)}
               initialAddress={user.address}
               initialPhone={user.phone}
-              onSave={(addr, phone) => updateUser({ address: addr, phone: phone || '' })}
+              onSave={(addr, phone) => dispatch(updateUser({ address: addr, phone: phone || '' }))}
             />
           </Paper>
         </Grid>
 
         {/* Quick Stats Section */}
         <Grid item xs={12} md={7}>
-          <Paper elevation={1} sx={{ p: 3, borderRadius: 3, height: '100%' }}>
+          <Paper elevation={1} sx={{ p: 3, borderRadius: 2, height: '100%' }}>
             <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
               <PersonOutlineIcon sx={{ color: 'primary.main' }} />
               <Typography variant="h6" sx={{ fontWeight: 600 }}>Account Overview</Typography>
@@ -151,16 +153,16 @@ const ProfilePage = () => {
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Box sx={{
-                  bgcolor: 'background.paper',
-                  color: 'text.primary',
-                  p: 2.5,
-                  borderRadius: 2,
-                  textAlign: 'center',
-                  transition: 'transform 180ms, box-shadow 180ms, border-color 180ms',
-                  border: '1px solid',
-                  borderColor: 'primary.main',
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6, borderColor: 'primary.dark' }
-                }}>
+                      bgcolor: 'background.paper',
+                      color: 'text.primary',
+                      p: 2.5,
+                      borderRadius: 2,
+                      textAlign: 'center',
+                      transition: 'transform 180ms, box-shadow 180ms',
+                      border: '1px solid',
+                      borderColor: 'divider',
+                      '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 }
+                    }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>{totalOrders}</Typography>
                   <Typography variant="body2" sx={{ mt: 0.5, opacity: 0.9 }}>Total Orders</Typography>
                 </Box>
@@ -172,10 +174,10 @@ const ProfilePage = () => {
                   p: 2.5,
                   borderRadius: 2,
                   textAlign: 'center',
-                  transition: 'transform 180ms, box-shadow 180ms, border-color 180ms',
+                  transition: 'transform 180ms, box-shadow 180ms',
                   border: '1px solid',
-                  borderColor: 'success.main',
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6, borderColor: 'success.dark' }
+                  borderColor: 'divider',
+                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 }
                 }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>₹{totalSpent.toFixed(0)}</Typography>
                   <Typography variant="body2" sx={{ mt: 0.5, opacity: 0.9 }}>Total Spent</Typography>
@@ -188,10 +190,10 @@ const ProfilePage = () => {
                   p: 2.5,
                   borderRadius: 2,
                   textAlign: 'center',
-                  transition: 'transform 180ms, box-shadow 180ms, border-color 180ms',
+                  transition: 'transform 180ms, box-shadow 180ms',
                   border: '1px solid',
-                  borderColor: 'error.main',
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6, borderColor: 'error.dark' }
+                  borderColor: 'divider',
+                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 }
                 }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
                     {totalOrders > 0 ? `₹${(totalSpent / totalOrders).toFixed(0)}` : '₹0'}
@@ -206,10 +208,10 @@ const ProfilePage = () => {
                   p: 2.5,
                   borderRadius: 2,
                   textAlign: 'center',
-                  transition: 'transform 180ms, box-shadow 180ms, border-color 180ms',
+                  transition: 'transform 180ms, box-shadow 180ms',
                   border: '1px solid',
-                  borderColor: 'warning.main',
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6, borderColor: 'warning.dark' }
+                  borderColor: 'divider',
+                  '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 }
                 }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
                     {user.orders?.reduce((sum, order) => sum + order.items.reduce((s, i) => s + i.quantity, 0), 0) || 0}
@@ -223,7 +225,7 @@ const ProfilePage = () => {
 
         {/* Order History Section */}
         <Grid item xs={12}>
-          <Paper elevation={1} sx={{ p: 3, borderRadius: 3 }}>
+          <Paper elevation={1} sx={{ p: 3, borderRadius: 2 }}>
             <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 3 }}>
               <ReceiptLongOutlinedIcon sx={{ color: 'primary.main' }} />
               <Typography variant="h6" sx={{ fontWeight: 600 }}>Order History</Typography>

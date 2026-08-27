@@ -21,12 +21,13 @@ import {
   AccountCircle,
   Close as CloseIcon
 } from '@mui/icons-material';
-import { useUser } from '../../contexts/useUser';
 import { styled } from '@mui/material/styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCart } from '../../contexts/CartContext';
-import { useProducts } from '../../contexts/ProductContext';
-import { useFavourites } from '../../contexts/FavouritesContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuthenticated } from '../../store/slices/userSlice';
+import { selectCartItemCount } from '../../store/slices/cartSlice';
+import { selectFavouritesCount } from '../../store/slices/favouritesSlice';
+import { selectFilters, setFilters as setFiltersAction } from '../../store/slices/productsSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -73,9 +74,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = memo(() => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { getCartItemCount } = useCart();
-  const { getFavouritesCount } = useFavourites();
-  const { setFilters, filters } = useProducts();
+  const dispatch = useDispatch();
+  const cartItemCount = useSelector(selectCartItemCount);
+  const favouritesCount = useSelector(selectFavouritesCount);
+  const filters = useSelector(selectFilters);
+  const setFilters = useCallback((f) => dispatch(setFiltersAction(f)), [dispatch]);
   const [searchTerm, setSearchTerm] = useState('');
   const [mobileNavAnchor, setMobileNavAnchor] = useState(null);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -83,7 +86,7 @@ const Header = memo(() => {
   const mobileSearchInputRef = useRef(null);
   const toolbarRef = useRef(null);
 
-  const { isAuthenticated } = useUser();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   
   const handleProfileIconClick = () => {
     if (isAuthenticated) navigate('/profile');
@@ -343,7 +346,7 @@ const Header = memo(() => {
             onClick={handleFavouritesClick}
             sx={{ display: { xs: 'none', md: 'inline-flex' } }}
           >
-            <Badge badgeContent={getFavouritesCount()} color="secondary">
+            <Badge badgeContent={favouritesCount} color="secondary">
               <FavoriteBorder />
             </Badge>
           </IconButton>
@@ -354,7 +357,7 @@ const Header = memo(() => {
             color="inherit"
             onClick={handleCartClick}
           >
-            <Badge badgeContent={getCartItemCount()} color="secondary">
+            <Badge badgeContent={cartItemCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>

@@ -10,7 +10,12 @@ import {
 import HeroShowcase from "../components/home/HeroShowcase";
 import GlowingCard from "../components/common/GlowingCard";
 import SplitText from "../components/common/SplitText";
-import { useProducts } from "../contexts/ProductContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectProducts,
+  selectCategories,
+  setFilters,
+} from "../store/slices/productsSlice";
 import { useNavigate } from "react-router-dom";
 import useInView from "../hooks/useInView";
 
@@ -60,12 +65,10 @@ const HomePage = memo(() => {
     },
   ];
 
-  const { products, getCategories, setFilters } = useProducts();
+  const dispatch = useDispatch();
+  const products = useSelector(selectProducts);
+  const categories = useSelector(selectCategories);
   const navigate = useNavigate();
-
-  // categories may be provided as an array (getCategories) from context; handle both function/array shapes
-  const categories =
-    typeof getCategories === "function" ? getCategories() : getCategories || [];
 
   // Build card data: representative image for each category (first product found)
   const categoryCards = (categories || [])
@@ -94,11 +97,11 @@ const HomePage = memo(() => {
     navigate("/products");
     try {
       startTransition(() => {
-        setFilters({ category });
+        dispatch(setFilters({ category }));
       });
     } catch {
       // Fallback if startTransition isn't available for any reason
-      setFilters({ category });
+      dispatch(setFilters({ category }));
     }
   };
 

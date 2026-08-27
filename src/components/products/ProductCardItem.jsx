@@ -18,23 +18,23 @@ import {
   FavoriteBorder
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../contexts/CartContext';
-import { useFavourites } from '../../contexts/FavouritesContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, updateCartItemQuantity, removeFromCart, selectCartItem } from '../../store/slices/cartSlice';
+import { toggleFavourite, selectIsFavourite } from '../../store/slices/favouritesSlice';
 import useInView from '../../hooks/useInView';
 
 const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false, eagerLoad = false, index = 0 }) => {
   const navigate = useNavigate();
-  const { addToCart, isInCart, getCartItem } = useCart();
-  const { toggleFavourite, isFavourite } = useFavourites();
-  
-  const cartItem = getCartItem(product.id);
-  const inCart = isInCart(product.id);
-  const isFav = isFavourite(product.id);
+  const dispatch = useDispatch();
+
+  const cartItem = useSelector(selectCartItem(product.id));
+  const inCart = !!cartItem;
+  const isFav = useSelector(selectIsFavourite(product.id));
 
   const handleAddToCart = useCallback((e) => {
     e.stopPropagation();
-    addToCart(product, 1);
-  }, [addToCart, product]);
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  }, [dispatch, product]);
 
   const handleCardClick = useCallback(() => {
     navigate(`/product/${product.id}`);
@@ -42,8 +42,8 @@ const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false
 
   const handleToggleFavourite = useCallback((e) => {
     e.stopPropagation();
-    toggleFavourite(product);
-  }, [toggleFavourite, product]);
+    dispatch(toggleFavourite(product));
+  }, [dispatch, product]);
 
   // Defensive fallback for missing product data
   const safeImage = product.image || product.thumbnail || 'https://via.placeholder.com/220x220?text=No+Image';
@@ -204,26 +204,76 @@ const ProductCard = memo(({ product, viewMode = 'grid', disableAnimation = false
       </CardContent>
       <CardActions sx={{ p: 2, pt: 0 }}>
         <Box sx={{ width: '100%', mx: 2 }}>
-          
-          <Button
-            variant="contained"
-            startIcon={<AddShoppingCart />}
-            onClick={handleAddToCart}
-            fullWidth
-            disabled={!product.stock || product.stock < 1}
-            sx={{
-              py: 1,
-              fontWeight: 600,
-              textTransform: 'none',
-              borderRadius: 2,
-              boxShadow: 2,
-              '&:hover': {
-                boxShadow: 4,
-              }
-            }}
-          >
-            Add to Cart
-          </Button>
+          {inCart ? (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                border: '1px solid',
+                borderColor: 'primary.main',
+                borderRadius: 2,
+                py: 0,
+                px: 0.5,
+                height: 40.75,
+                boxSizing: 'border-box'
+              }}
+            >
+              <IconButton
+                size="small"
+                color="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (cartItem.quantity <= 1) {
+                    dispatch(removeFromCart(product.id));
+                  } else {
+                    dispatch(updateCartItemQuantity({ id: product.id, quantity: cartItem.quantity - 1 }));
+                  }
+                }}
+                sx={{ p: 0.5 }}
+              >
+                <Remove fontSize="small" />
+              </IconButton>
+
+              <Typography variant="body1" sx={{ fontWeight: 700, minWidth: 28, textAlign: 'center', lineHeight: 1 }}>
+                {cartItem.quantity}
+              </Typography>
+
+              <IconButton
+                size="small"
+                color="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(updateCartItemQuantity({ id: product.id, quantity: cartItem.quantity + 1 }));
+                }}
+                disabled={product.stock && cartItem.quantity >= product.stock}
+                sx={{ p: 0.5 }}
+              >
+                <Add fontSize="small" />
+              </IconButton>
+            </Box>
+          ) : (
+            <Button
+              variant="contained"
+              startIcon={<AddShoppingCart />}
+              onClick={handleAddToCart}
+              fullWidth
+              disabled={!product.stock || product.stock < 1}
+              sx={{
+                py: 1,
+                fontWeight: 600,
+                textTransform: 'none',
+                borderRadius: 2,
+                boxShadow: 2,
+                '&:hover': {
+                  boxShadow: 4,
+                }
+              }}
+            >
+              Add to Cart
+            </Button>
+          )}
         </Box>
       </CardActions>
     </Card>

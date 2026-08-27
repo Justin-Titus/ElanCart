@@ -18,14 +18,17 @@ import {
   CreditCard
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartState, selectCartItemCount, clearCart } from '../store/slices/cartSlice';
 import { useBuyNow } from '../hooks/useBuyNow';
 import CartItem from '../components/cart/CartItem';
 const formatINR = (amount) => `₹${amount.toFixed(2)}`;
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartState, clearCart } = useCart();
+  const dispatch = useDispatch();
+  const cartState = useSelector(selectCartState);
+  const cartItemCount = useSelector(selectCartItemCount);
   const { clearBuyNowData } = useBuyNow();
 
   const theme = useTheme();
@@ -47,7 +50,7 @@ const CartPage = () => {
   const handleClearCart = () => {
     if (cartState.items.length === 0) return;
     if (window.confirm('Are you sure you want to clear your cart?')) {
-      clearCart();
+      dispatch(clearCart());
     }
   };
 
@@ -110,7 +113,8 @@ const CartPage = () => {
           {!isMobile && 'Continue Shopping'}
         </Button>
         <SplitText 
-          text={`Shopping Cart (${cartState.items.length} items)`}
+          key={`cart-title-${cartItemCount}`}
+          text={`Shopping Cart (${cartItemCount} ${cartItemCount === 1 ? 'item' : 'items'})`}
           tag="h1"
           className="cart-title"
           delay={50}

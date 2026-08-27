@@ -1,19 +1,20 @@
 # ElanCart
 
-ElanCart is a robust and modern shopping cart application tailored for e-commerce platforms. It delivers a fast, intuitive, and responsive user experience, making it easy for customers to browse products, manage their cart, and complete purchases. The project leverages JavaScript for dynamic interactions, CSS for styling, and HTML for semantic structure. (If you add a Python backend, include backend docs and a requirements file as needed.)
+ElanCart is a modern, **Redux‑Toolkit + Vite** powered shopping cart application for e‑commerce platforms. It delivers a fast, intuitive, and responsive user experience, making it easy for customers to browse products, manage their cart, and complete purchases. The frontend is built with React 19, Material‑UI 6, and Vite 7, while state is managed centrally with Redux Toolkit. (If you add a Python backend later, include its docs and a `requirements.txt` as needed.)
 
 ---
 
 ## 🛠️ Features
 
-- **Product Browsing:** Users can view and search products with real-time filtering.
-- **Cart Management:** Add, update, and remove items; supports quantity adjustments.
-- **Persistent Cart:** Cart data is retained across sessions using local storage or backend sync.
-- **Checkout Workflow:** Guided multi-step checkout including address and payment details.
-- **Order Summary:** Detailed view of cart contents, pricing, and order totals.
-- **Responsive Design:** Mobile-first layout adapts seamlessly to all device sizes.
-- **Fast Performance:** Minimal dependencies and optimized code for quick load times.
-- **Accessibility:** Keyboard navigation, screen reader support, and ARIA labels.
+- **Product Browsing:** Real‑time search, filtering, and sorting of a curated product catalog.
+- **Redux‑Toolkit State Management:** Centralized store with slices for cart, favourites, user, products, and locale.
+- **Vite Development Server:** Instant hot‑module reloading and fast production builds.
+- **Persistent Cart & Favourites:** Automatic localStorage persistence with deduplication and graceful recovery.
+- **Quantity Controls:** Inline `‑` / `+` stepper on product cards and cart items.
+- **Checkout Workflow:** Guided multi‑step checkout with address and payment handling.
+- **Responsive Design:** Mobile‑first layout adapts seamlessly to all device sizes.
+- **Fast Performance:** Optimized bundle size and code‑splitting.
+- **Accessibility:** Keyboard navigation, screen‑reader support, and ARIA labels.
 
 ---
 
@@ -26,22 +27,24 @@ ElanCart is a robust and modern shopping cart application tailored for e-commerc
    ```
 
 2. **Install dependencies**
-   - For the Node.js frontend:
-     ```bash
-     npm install
-     ```
-   - If you add a Python backend later, install its dependencies as documented in that backend's README or `requirements.txt`.
+   ```bash
+   npm install
+   ```
+   (If you later add a Python backend, install its dependencies as documented in that backend's README or `requirements.txt`.)
 
 3. **Run the application**
-   - Frontend (development using Vite):
+   - Development (Vite hot‑module reloading):
      ```bash
      npm run dev
      ```
-   - Build for production:
+   - Production build:
      ```bash
      npm run build
      ```
-   - If this repository is paired with a backend, run the backend according to its own documentation.
+   - Serve the built files (e.g., with `vite preview` or any static server):
+     ```bash
+     npm run preview
+     ```
 
 ---
 
@@ -56,15 +59,15 @@ ElanCart is a robust and modern shopping cart application tailored for e-commerc
 
 ## 🤝 Contributing
 
-Contributions are welcome and appreciated! To contribute:
+Contributions are welcome! To get started:
 
-3. Fork the repository.
-4. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-5. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-6. Push to your branch (`git push origin feature/AmazingFeature`).
-7. Open a Pull Request.
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m "Add some AmazingFeature"`).
+4. Push to your branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
-If this repository contains a `CONTRIBUTING.md` file, please follow its guidelines; otherwise open an issue or PR describing the change.
+If a `CONTRIBUTING.md` file exists, please follow its guidelines; otherwise open an issue or PR describing the change.
 
 ---
 

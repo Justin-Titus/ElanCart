@@ -14,16 +14,18 @@ import {
   ShoppingCart
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useFavourites } from '../contexts/FavouritesContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavouritesState, clearFavourites } from '../store/slices/favouritesSlice';
 import ProductCard from '../components/products/ProductCardItem';
 
 const FavouritesPage = () => {
   const navigate = useNavigate();
-  const { favouritesState, clearFavourites } = useFavourites();
+  const dispatch = useDispatch();
+  const favouritesState = useSelector(selectFavouritesState);
 
   const handleClearFavourites = () => {
     if (window.confirm('Are you sure you want to clear all favourites?')) {
-      clearFavourites();
+      dispatch(clearFavourites());
     }
   };
 

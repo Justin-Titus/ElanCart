@@ -1,9 +1,11 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useUser } from '../../contexts/useUser';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated, selectUserLoading } from '../../store/slices/userSlice';
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useUser();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const loading = useSelector(selectUserLoading);
   const location = useLocation();
 
   if (loading) return null; // or a spinner

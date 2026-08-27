@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper, Chip, Stack, useTheme, useMediaQuery } from '@mui/material';
 import { LocalOffer, Bolt, TrendingUp, Star } from '@mui/icons-material';
-import { useProducts } from '../../contexts/ProductContext';
+import { useSelector } from 'react-redux';
+import { selectProducts, selectProductsLoading } from '../../store/slices/productsSlice';
 
 const ProductsBanner = ({ totalProducts }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { products, loading } = useProducts();
+  const products = useSelector(selectProducts);
+  const loading = useSelector(selectProductsLoading);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

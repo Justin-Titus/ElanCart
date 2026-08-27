@@ -1,14 +1,26 @@
 import React, { useState, memo, useMemo } from 'react';
 import { Box, FormControl, InputLabel, Select, MenuItem, Button, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { useProducts } from '../../contexts/ProductContext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectFilters,
+  selectSortBy,
+  selectCategories,
+  selectProducts,
+  setFilters as setFiltersAction,
+  setSortBy as setSortByAction
+} from '../../store/slices/productsSlice';
 
 const ProductFilters = memo(() => {
-  const { filters, setFilters, setSortBy, sortBy, getCategories, products } = useProducts();
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
+  const sortBy = useSelector(selectSortBy);
+  const categories = useSelector(selectCategories);
+  const products = useSelector(selectProducts);
+  const setFilters = (f) => dispatch(setFiltersAction(f));
+  const setSortBy = (s) => dispatch(setSortByAction(s));
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const categories = Array.isArray(getCategories) ? getCategories : (typeof getCategories === 'function' ? getCategories() : []);
 
   // Treat thresholds as rupee values. Convert product prices to rupees using a fixed rate
   const priceOptions = useMemo(() => {

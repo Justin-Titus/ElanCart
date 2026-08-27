@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PageTransition from '../components/common/PageTransition';
 import { Box, Paper, Typography, TextField, Button, Stack, Alert } from '@mui/material';
-import { useUser } from '../contexts/useUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectIsAuthenticated } from '../store/slices/userSlice';
 import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 const LoginPage = () => {
-  const { isAuthenticated, login } = useUser();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '', name: '' });
@@ -41,7 +43,7 @@ const LoginPage = () => {
       return;
     }
     // Simulate login/signup
-    login({ email: form.email, name: form.name, address: '', orders: [] });
+    dispatch(login({ email: form.email, name: form.name, address: '', orders: [] }));
     // After login navigate back to the page that initiated the login, preserving any state
     const destLoc = location?.state?.from || { pathname: '/profile' };
     // Navigate using the full location object to preserve pathname/search/hash/state

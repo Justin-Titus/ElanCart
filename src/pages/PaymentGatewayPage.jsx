@@ -25,16 +25,17 @@ import {
   LocalAtm
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useUser } from '../contexts/useUser';
-import { useCart } from '../contexts/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser, updateUser } from '../store/slices/userSlice';
+import { clearCart } from '../store/slices/cartSlice';
 
 const formatINR = (amount) => `₹${amount.toFixed(2)}`;
 
 const PaymentGatewayPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { updateUser, user } = useUser();
-  const { clearCart } = useCart();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
@@ -174,7 +175,7 @@ const PaymentGatewayPage = () => {
 
   const completeOrder = (paymentDetails) => {
     // Save order to user profile
-    updateUser({
+    dispatch(updateUser({
       orders: [
         ...(user.orders || []),
         {
@@ -185,11 +186,11 @@ const PaymentGatewayPage = () => {
           date: new Date().toISOString()
         }
       ]
-    });
+    }));
 
     // Clear cart if not buy now mode
     if (!buyNowMode) {
-      clearCart();
+      dispatch(clearCart());
     }
 
     // Clear any saved checkout draft — order completed

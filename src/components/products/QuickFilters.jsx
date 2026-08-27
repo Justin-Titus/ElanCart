@@ -1,34 +1,35 @@
 import React from 'react';
 import { Box, Chip, Stack, Typography } from '@mui/material';
 import { LocalOffer, Whatshot, NewReleases, Star } from '@mui/icons-material';
-import { useProducts } from '../../contexts/ProductContext';
+import { useDispatch } from 'react-redux';
+import { setFilters, setSortBy } from '../../store/slices/productsSlice';
 
 const QuickFilters = () => {
-  const { setFilters, setSortBy } = useProducts();
+  const dispatch = useDispatch();
 
   const quickFilters = [
     {
       label: 'Best Sellers',
       icon: Whatshot,
-      action: () => setSortBy('rating-desc'),
+      action: () => dispatch(setSortBy('rating-desc')),
       color: '#FF6B6B'
     },
     {
       label: 'New Arrivals',
       icon: NewReleases,
-      action: () => setSortBy('name-desc'),
+      action: () => dispatch(setSortBy('name-desc')),
       color: '#4ECDC4'
     },
     {
       label: 'Top Rated',
       icon: Star,
-      action: () => setSortBy('rating-desc'),
+      action: () => dispatch(setSortBy('rating-desc')),
       color: '#FFD93D'
     },
     {
       label: 'Deals',
       icon: LocalOffer,
-      action: () => setFilters({ maxPrice: 500 }),
+      action: () => dispatch(setFilters({ maxPrice: 500 })),
       color: '#6C5CE7'
     }
   ];

@@ -19,16 +19,17 @@ import {
   InputAdornment,
   CircularProgress
 } from '@mui/material';
-import { useUser } from '../contexts/useUser';
-import { useCart } from '../contexts/CartContext';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../store/slices/userSlice';
+import { selectCartState } from '../store/slices/cartSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useBuyNow } from '../hooks/useBuyNow';
 
 const formatINR = (amount) => `₹${amount.toFixed(2)}`;
 
 const CheckoutPage = () => {
-  const { user } = useUser();
-  const { cartState } = useCart();
+  const user = useSelector(selectUser);
+  const cartState = useSelector(selectCartState);
   const navigate = useNavigate();
   const location = useLocation();
   const { buyNowData, isLoading: buyNowLoading, clearBuyNowData } = useBuyNow();

@@ -25,7 +25,13 @@ import {
   YouTube,
   ArrowUpward,
 } from "@mui/icons-material";
-import { useLocale } from "../../contexts/useLocale";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectLang,
+  selectCurrency,
+  setLang as setLangAction,
+  setCurrency as setCurrencyAction,
+} from "../../store/slices/localeSlice";
 import { PartnerLogoPlaceholder } from "./FooterAssets";
 
 const Footer = () => {
@@ -35,7 +41,11 @@ const Footer = () => {
     severity: "success",
     message: "",
   });
-  const { lang, currency, setLang, setCurrency } = useLocale();
+  const dispatch = useDispatch();
+  const lang = useSelector(selectLang);
+  const currency = useSelector(selectCurrency);
+  const setLang = (value) => dispatch(setLangAction(value));
+  const setCurrency = (value) => dispatch(setCurrencyAction(value));
 
   const submitNewsletter = () => {
     const email = (newsletterEmail || "").trim();
